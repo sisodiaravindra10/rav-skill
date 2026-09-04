@@ -269,6 +269,8 @@ Across all seven: color encodes state or emotion, not decoration; type weight an
 
 ## Craft floor
 
+The mechanical half of the floor is executable. Run `node <skill-dir>/scripts/verify.mjs --source <paths>` on the source, and evaluate what `--emit-browser` prints in the running page. Do that before hand-checking anything: every rule it covers has been broken while this skill was loaded and its checklist was in context.
+
 Once the direction is settled and immediately before editing UI, load **[reference/craft-floor.md](reference/craft-floor.md)**. It carries the mechanical quality floor (contrast, depth, spacing, type, states, browser surfaces, performance, a11y) and the defaults to refuse. Do not load it for planning-only work, and do not announce it as a checklist while building.
 
 Alongside it, **[reference/tells.md](reference/tells.md)** carries the full production-tell list: the specific strings, labels, strips, and decorations that mark a page as AI-built. Run it as the last filter before delivering, and as the checklist in critique mode.
@@ -316,6 +318,9 @@ Verify in bounded passes, never an open loop. The ceiling covers the whole cycle
 2. Inspect once, batched: desktop and mobile together, both themes, real content, the states that exist. One render, all the checks.
 3. Fix everything that round showed, in one batch.
 4. Confirm with at most one more round. Then stop.
+
+Both inspection rounds start with `scripts/verify.mjs`, source and browser. Eyes are for
+the half it cannot decide.
 
 Open-ended self-QA burns money doing worse what a critique pass does better. A clean automated scan is a floor, not proof. Never claim a check ran that did not.
 

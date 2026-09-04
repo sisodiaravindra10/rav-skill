@@ -2,6 +2,27 @@
 
 Load this after the direction is settled and immediately before editing UI. Build against it without announcing it as a checklist. A pinned brief or the committed world overrides anything here; your own habit does not. The floor holds the mechanics, it never picks the direction.
 
+## Run the checker first
+
+Before reading the rest of this file, run the part of it a machine can decide. Reading a
+floor is how it stops firing; the rules below were all present the day each of them was
+broken.
+
+```bash
+node <skill-dir>/scripts/verify.mjs --source <paths>
+```
+
+Then, on the running page, roughly two seconds after load so entrance animations have
+settled, evaluate what `node <skill-dir>/scripts/verify.mjs --emit-browser` prints. It
+returns JSON: composited contrast with alpha and ancestor opacity, touch targets that
+account for pseudo-element hit areas, overflow, dead links, unreachable scroll regions,
+focusables inside hidden containers, browser surfaces, and script-gated content.
+
+Exit 0 is clean, exit 2 means findings. A line that quotes a banned pattern as evidence
+rather than committing it can carry `rav-verify-ignore`.
+
+The checker owns the mechanical half. Everything below is the half it cannot decide.
+
 ## Verify (checks on the built result, not on the intention)
 
 Run them together in one batched inspection round. They share a single render.

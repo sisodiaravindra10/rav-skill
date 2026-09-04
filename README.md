@@ -61,6 +61,29 @@ Sixteen scoped verbs. Name one and the work stays inside it.
 | fix | `clarify` `adapt` `optimize` |
 | evaluate | `review-motion` |
 
+## The checker
+
+The mechanical half of the craft floor is executable, because a floor you only read stops
+firing.
+
+```bash
+node scripts/verify.mjs --source src            # static scan, exit 2 on findings
+node scripts/verify.mjs --emit-browser          # prints a probe to run in the page
+```
+
+The source scan covers em dashes, enumerated section labels, `h-screen`, competing height
+utilities, scroll listeners, reveal gates, un-guarded CDN scripts, blanket reduced-motion
+kills, `theme()` in plain CSS, and a `var()` colour in the Tailwind config (which makes it
+emit no utility at all, silently).
+
+The browser probe measures what only the rendered page knows: contrast composited through
+alpha and ancestor opacity, touch targets that account for pseudo-element hit areas,
+overflow, dead links, keyboard-unreachable scroll regions, focusables inside hidden
+containers, browser surfaces, and content still gated at opacity 0. Run it about two
+seconds after load so entrance animations have settled.
+
+`rav-verify-ignore` on a line exempts it, for code that quotes a banned pattern as evidence.
+
 ## Layout
 
 ```
@@ -72,6 +95,7 @@ reference/moves.md            the sixteen move playbooks
 reference/modes.md            build / generate / critique output shapes and scoring
 reference/redesign.md         redesign protocol
 reference/mobile-aesthetics.md  seven consumer-app lanes
+scripts/verify.mjs            the craft floor, made executable
 ```
 
 Progressive disclosure: the spine stays under 400 lines and the playbooks load only when

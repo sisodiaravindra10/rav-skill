@@ -1,7 +1,7 @@
 ---
 name: rav
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 description: Ravindra's personal design skill. Reach for it whenever he wants an interface built, redesigned, or improved in his own taste rather than a generic one, even when he does not name it. Covers landing pages, portfolio sections, brand moments, hero sections, product UI and dashboards, consumer mobile screens, components, mockups, and image references. Fires on build, design, generate, redesign, critique, audit, and on the scoped moves polish, bolder, quieter, distill, harden, onboard, animate, colorize, typeset, layout, delight, clarify, adapt, optimize, overdrive, review-motion. Also on /rav, "use rav taste", "build it", "design it", "make it better".
 ---
 
@@ -43,7 +43,8 @@ visitor:  persuade | operate | read | experience                                
 read:     <one line: page kind, audience, vibe, design-system pick, any brief override>        *
 material: <what the surface is made of: "paper", "corrugated metal", "studio photo + grain">   (brand + kinetic only)
 color:    <restrained | committed | full-palette | drenched> + surface / ink / accent           *
-hero:     <full-bleed-photo | centered-display | asymmetric-split | image-with-overlay>         (build mode + brand|kinetic only)
+hero:     <full-bleed-photo | centered-display | asymmetric-split | image-with-overlay |
+           live-input | flow-diagram>                                                          (build mode + brand|kinetic only)
 lane:     <soft-wellness | bold-playful | editorial-max | clean-data | material-hero | conversational | warm-journal>   (product register + consumer-mobile app only)
 dials:    variance=N/10 motion=N/10 density=N/10                                               *
 ```
@@ -147,6 +148,7 @@ Universal rules:
 - **Mobile collapse is explicit per section.** Every asymmetric layout declares its sub-768px fallback in the same component. Remove rotations and negative overlaps. `min-h-[100dvh]`, never `h-screen`. Touch targets 44px.
 - **Spacing rhythm:** tight groups, generous separation, more space above a heading than below it. Read the computed values, do not trust the intention.
 - **Squint test:** blur the detail. Primary, secondary, and the major groups must still resolve in order.
+- **Composition reference.** **[reference/layouts.md](reference/layouts.md)** carries worked recipes for the hero archetypes below plus eight section archetypes, each read off a real page with its load-bearing part and its failure mode named, and each source ranked by how much of it is safe to take. Load it in build mode before scaffolding a brand or marketing page, and in critique mode when the finding is that the structure is generic.
 
 ### Hero archetypes (build mode, pick one before scaffolding)
 
@@ -156,8 +158,10 @@ State the pick in the preflight `hero:` line. Do not default to left-aligned edi
 2. **centered-display**: massive display type on a near-empty surface, one accent. Type carries everything. Zop.Dev, brutalist, editorial, manifesto.
 3. **asymmetric-split**: text one half, image or interactive the other, massive negative space between. Default for SaaS landings when the photography is not strong enough for full-bleed.
 4. **image-with-overlay**: image as the background of a constrained content card, 1px hairline framing. Case studies, manifestos, portfolio pieces.
+5. **live-input**: the product's real entry action at hero scale, working, as the first interactive element. Prompt boxes, search, email capture fused to its CTA. AI tools, SaaS with one entry action.
+6. **flow-diagram**: real UI fragments as nodes on a 1px routed line, mono uppercase labels sitting on the connectors. Orchestration, routing, and aggregation products, where the value IS the path.
 
-Pick by register and material first. The archetype follows the material, not taste. Centered heroes are avoided above `variance=4` unless the message itself is the design.
+Pick by register and material first. The archetype follows the material, not taste. Centered heroes are avoided above `variance=4` unless the message itself is the design, or a real artifact sits directly under the CTA pair carrying the variance the type gave up.
 
 ## Imagery
 

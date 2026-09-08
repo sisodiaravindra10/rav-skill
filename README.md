@@ -2,8 +2,10 @@
 
 A personal design skill for Claude Code. It catches the defaults you were about to ship.
 
-Three registers, sixteen scoped moves, and a sixty-one item production-tell list that
+Three registers, sixteen scoped moves, and a sixty-three item production-tell list that
 runs as the last filter before anything ships.
+
+<!-- tell count: grep -c '^- ' reference/tells.md, minus the 3 hex-value bullets under Palette bans -->
 
 ```bash
 git clone https://github.com/sisodiaravindra10/rav-skill ~/.claude/skills/rav
@@ -61,6 +63,20 @@ Sixteen scoped verbs. Name one and the work stays inside it.
 | fix | `clarify` `adapt` `optimize` |
 | evaluate | `review-motion` |
 
+## The composition reference
+
+`reference/layouts.md` holds worked recipes for six hero archetypes and eight section
+archetypes, each read off a real page: the shape with real proportions, the load-bearing
+part, when to reach for it, and what kills it.
+
+It also ranks its own sources, which matters more than the recipes do. Shipped work is
+safe to study whole. Two of the references have strong structure and placeholder content,
+one with a Logoipsum logo wall and one with a typo in its hero badge, so nothing about
+their proof is instructive. Three are marketplace templates worth exactly one move each,
+and they ship card fans, invented stat grids and lime-on-electric-blue, all of which the
+tell list already bans. A reference file that treats every source as equally good teaches
+the skill to ship a template.
+
 ## The checker
 
 The mechanical half of the craft floor is executable, because a floor you only read stops
@@ -89,12 +105,13 @@ seconds after load so entrance animations have settled.
 ```
 SKILL.md                      the decision spine, always loaded
 reference/craft-floor.md      mechanical quality floor, loaded before editing UI
-reference/tells.md            61 production tells, the last filter before delivery
+reference/tells.md            63 production tells, the last filter before delivery
 reference/world.md            visual-world derivation and the design-system map
 reference/moves.md            the sixteen move playbooks
 reference/modes.md            build / generate / critique output shapes and scoring
 reference/redesign.md         redesign protocol
 reference/mobile-aesthetics.md  seven consumer-app lanes
+reference/layouts.md          hero and section composition recipes, sources ranked
 scripts/verify.mjs            the craft floor, made executable
 ```
 

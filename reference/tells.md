@@ -94,11 +94,16 @@ Override only when the brief names those colors, or the identity is genuinely vi
 - Centered hero on dark mesh as the default. Narrow container forcing an H1 to five lines.
 - Sections that flip theme mid-page.
 - `h-screen` on a full-height section.
+- A fan or scatter of UI cards floating on a gradient. The template signature for "our product has screens". Position fragments along a real route or a real grid, or show one screen properly.
+- Two filled buttons side by side as the hero CTA pair. One filled primary plus one ghost or outline secondary.
+- A device mock centered on a gradient filling the right half of a split hero. The split was spent on decoration.
 
 ## Assets and dependencies
 
 - Broken Unsplash hotlinks. Use `picsum.photos` with a descriptive seed, a generated image, or a real asset.
 - Plain text wordmarks in a logo wall. Use Simple Icons, devicon, or a generated monogram SVG.
+- Logoipsum and other placeholder logo marks. Reliable proof that a reference page is a template, and an instant fail in delivered work.
+- A logo wall scaled to equal width instead of equal optical mass. Wide wordmarks then dwarf square marks and the row reads uneven.
 - Category labels printed under logos in a logo wall.
 - Hand-rolled decorative SVG illustrations as a default. Library icons are fine; a single simple geometric mark is fine; freehand illustration is not.
 - shadcn/ui shipped in its default state. Customize radii, color, and shadow to the project.

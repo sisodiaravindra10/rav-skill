@@ -115,6 +115,7 @@ reference/layouts.md          hero and section composition recipes, sources rank
 reference/fonts.md            a checked Google Fonts roster by job, pairings, loading rules
 reference/voice.md            eighteen machine-copy sentence shapes and the pass that removes them
 reference/micro.md            the control-scale motion floor: press, hover, popovers, tooltips
+reference/intake.md           read the project first, then one round of questions before designing
 scripts/verify.mjs            the craft floor, made executable
 ```
 

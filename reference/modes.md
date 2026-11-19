@@ -22,6 +22,7 @@ Where the skill fired:
 
 **Process**
 
+0. **Run intake** from [intake.md](intake.md) unless it was already done or a skip applies.
 1. **Classify the work.** New surface or replacement world, whole surface inside an established world, or a local addition. Only the first runs [world.md](world.md). A local addition inherits its surface and changes nothing else.
 2. **Pick the foundation honestly.** One design system per project, from the map in world.md. Verify every dependency exists in `package.json` before importing, and print the install command when it does not. Never reinvent CSS for something with an official package.
 3. **Scaffold the world.** Pick type from [fonts.md](fonts.md). Color strategy and palette, type roles, spacing scale, radius system, all locked before any component. Theme lock, color lock, shape lock stated once and obeyed everywhere.

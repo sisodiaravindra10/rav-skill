@@ -1,7 +1,7 @@
 ---
 name: rav
 metadata:
-  version: 3.2.0
+  version: 3.3.0
 description: Ravindra's personal design skill, the taste layer for any interface he wants in his own hand rather than a generic one. Use it whenever he asks to build, design, redesign, mock up, critique or improve a website, landing page, portfolio piece, hero, brand moment, product UI, dashboard, consumer mobile screen or component, even when he does not name the skill, and for the scoped moves polish, bolder, quieter, distill, harden, onboard, animate, colorize, typeset, layout, delight, clarify, adapt, optimize, overdrive and review-motion on an existing surface. Also on /rav, "use rav taste", "in my style", "make it look like mine". For an award-level or immersive site, pair it with awwwards (it runs build and QA, rav supplies taste). Not for ZopDev-branded deliverables, which the zopdev skills own; not for films and motion graphics; not for non-visual work (refactors, docs, copy-only edits); and never when he says "without rav" or asks for your own judgment instead.
 ---
 
@@ -45,6 +45,15 @@ So before any rule is applied, the work needs three things, and the preflight st
 
 When a rule below would make the page more timid (shrinking the type, thinning the color, swapping the product for a diagram of the product), the rule is being misread. Scale and commitment are allowed; the rules exist to keep them clean.
 
+## Intake: ask before you design
+
+A new build, a generate run, or a redesign starts by getting the context, not by guessing it. Load **[reference/intake.md](reference/intake.md)** and do two things in order.
+
+1. **Read first.** Open the project and the conversation and collect what is already answered: an existing world, the stack, real content, pinned choices. Never ask what the folder can tell you.
+2. **Ask one round.** Up to four questions, together, through the structured question tool when there is one. Each offers concrete options with your recommendation first, is phrased in his terms, and would change the design depending on the answer. The most useful one offers two or three first-screen directions in plain sentences and asks which is closest. Never ask him to choose a font, a hex value or a grid; that is this skill's job.
+
+Then play the answers back in the preflight and build without stopping. Skip the round for a scoped move on an existing surface, a local addition, a brief that already answers the questions, or when he says "just build it" or "you decide". If nobody is there to answer, do not stall: proceed and list every assumption in the `asked:` line.
+
 ## Pre-flight (mandatory, output before any code or images)
 
 State the block below, then proceed. Lines marked `*` are mandatory always; others apply per mode/register.
@@ -56,6 +65,7 @@ register: brand | kinetic | product                                             
 visitor:  persuade | operate | read | experience                                              *
 read:     <one line: page kind, audience, vibe, design-system pick, any brief override>        *
 idea:     <one sentence a stranger would repeat, plus the dominant thing in the first fold>    (build + generate, persuade | experience)
+asked:    <what intake asked and he answered | skipped, and why> + assumed: <what was left to you>   *
 material: <what the surface is made of: "paper", "corrugated metal", "studio photo + grain">   (brand + kinetic only)
 color:    <restrained | committed | full-palette | drenched> + surface / ink / accent           *
 hero:     <full-bleed-photo | centered-display | asymmetric-split | image-with-overlay |
@@ -64,7 +74,7 @@ lane:     <soft-wellness | bold-playful | editorial-max | clean-data | material-
 dials:    variance=N/10 motion=N/10 density=N/10                                               *
 ```
 
-The `read:` line is the design read. One sentence, this shape: *"Reading this as a `<page kind>` for `<audience>`, in a `<vibe>` language, leaning on `<system or aesthetic family>`."* If the brief is genuinely ambiguous, ask exactly ONE question, never a dump. If you can infer, do not ask.
+The `read:` line is the design read. One sentence, this shape: *"Reading this as a `<page kind>` for `<audience>`, in a `<vibe>` language, leaning on `<system or aesthetic family>`."* It carries what intake learned. After the intake round, do not open a second one: a single follow-up question is allowed if something truly blocks, never a dump.
 
 ### Registers (visual world, decide first)
 
@@ -404,6 +414,7 @@ His own surfaces are the personal portfolio, the Deskmates store and its apps (C
 Run silently against every output.
 
 **Direction**
+- [ ] Intake done: project read first, one round of at most four questions asked or the skip named, assumptions listed
 - [ ] RAV_PREFLIGHT emitted; register, visitor mode, and color strategy chosen before any visual decision
 - [ ] (persuade/experience) the idea is one sentence a stranger would repeat, and each fold has one dominant thing
 - [ ] No rule was used as a reason to make the page smaller, paler or more table-like

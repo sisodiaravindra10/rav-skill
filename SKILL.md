@@ -1,7 +1,7 @@
 ---
 name: rav
 metadata:
-  version: 3.4.0
+  version: 3.5.0
 description: Ravindra's personal design skill, the taste layer for any interface he wants in his own hand rather than a generic one. Use it whenever he asks to build, design, redesign, mock up, critique or improve a website, landing page, portfolio piece, hero, brand moment, product UI, dashboard, consumer mobile screen or component, even when he does not name the skill, and for the scoped moves polish, bolder, quieter, distill, harden, onboard, animate, colorize, typeset, layout, delight, clarify, adapt, optimize, overdrive and review-motion on an existing surface. Also on /rav, "use rav taste", "in my style", "make it look like mine". For an award-level or immersive site, pair it with awwwards (it runs build and QA, rav supplies taste). Not for ZopDev-branded deliverables, which the zopdev skills own; not for films and motion graphics; not for non-visual work (refactors, docs, copy-only edits); and never when he says "without rav" or asks for your own judgment instead.
 ---
 
@@ -45,6 +45,17 @@ So before any rule is applied, the work needs three things, and the preflight st
 
 When a rule below would make the page more timid (shrinking the type, thinning the color, swapping the product for a diagram of the product), the rule is being misread. Scale and commitment are allowed; the rules exist to keep them clean.
 
+## His process comes first
+
+**[reference/process.md](reference/process.md)** is how he actually works, in his own words. Load it at the start of every build, generate or redesign. Where it disagrees with a rule in this file, it wins. The short form:
+
+1. It starts from **a place or a memory**, carried in his head. Ask for it before anything else.
+2. He chooses between **several moodboards** and rejects any that look already seen, boring or dated. So bring two or three real directions, never one.
+3. **The hero is built first and finished properly.** Then stop and show it clean, with no explanation, and wait for his reaction. Nothing else is built until he has reacted.
+4. Each element is **pushed too far, then pulled back** to "a bit designed but minimal": one considered idea, clearly visible.
+5. He checks four things: **contrast, visual balance, visual hierarchy, and whether it pops.**
+6. Images are **used dynamically**: cut out, breaking their containers, never a stock photo in a box.
+
 ## Intake: ask before you design
 
 A new build, a generate run, or a redesign starts by getting the context, not by guessing it. Load **[reference/intake.md](reference/intake.md)** and do two things in order.
@@ -52,7 +63,7 @@ A new build, a generate run, or a redesign starts by getting the context, not by
 1. **Read first.** Open the project and the conversation and collect what is already answered: an existing world, the stack, real content, pinned choices. Never ask what the folder can tell you.
 2. **Ask one round.** Up to four questions, together, through the structured question tool when there is one. Each offers concrete options with your recommendation first, is phrased in his terms, and would change the design depending on the answer. The most useful one offers two or three first-screen directions in plain sentences and asks which is closest. Never ask him to choose a font, a hex value or a grid; that is this skill's job.
 
-Then play the answers back in the preflight and build without stopping. Skip the round for a scoped move on an existing surface, a local addition, a brief that already answers the questions, or when he says "just build it" or "you decide". If nobody is there to answer, do not stall: proceed and list every assumption in the `asked:` line.
+Then play the answers back in the preflight and build. The one planned stop is after the hero, see His process comes first. Skip the round for a scoped move on an existing surface, a local addition, a brief that already answers the questions, or when he says "just build it" or "you decide". If nobody is there to answer, do not stall: proceed and list every assumption in the `asked:` line.
 
 ## Pre-flight (mandatory, output before any code or images)
 
@@ -416,6 +427,9 @@ His own surfaces are the personal portfolio, the Deskmates store and its apps (C
 Run silently against every output.
 
 **Direction**
+- [ ] His process followed: the place asked for, more than one direction shown, hero finished and shown before the rest, each element pushed then pulled back
+- [ ] Contrast, balance and hierarchy hold, and one thing on each screen pops
+- [ ] Images are cut out or break their container where the world allows; none is a stock photo in a box
 - [ ] Intake done: project read first, one round of at most four questions asked or the skip named, assumptions listed
 - [ ] RAV_PREFLIGHT emitted; register, visitor mode, and color strategy chosen before any visual decision
 - [ ] (persuade/experience) the idea is one sentence a stranger would repeat, and each fold has one dominant thing

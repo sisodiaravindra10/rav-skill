@@ -116,6 +116,7 @@ reference/fonts.md            a checked Google Fonts roster by job, pairings, lo
 reference/voice.md            eighteen machine-copy sentence shapes and the pass that removes them
 reference/micro.md            the control-scale motion floor: press, hover, popovers, tooltips
 reference/intake.md           read the project first, then one round of questions before designing
+reference/process.md          how Ravindra actually works, in his own words; outranks the borrowed rules
 scripts/verify.mjs            the craft floor, made executable
 ```
 

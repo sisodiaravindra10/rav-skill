@@ -31,6 +31,7 @@ Pick the four that are still open and matter most. They are listed in order of h
 
 | what is unknown | ask | what it decides |
 |---|---|---|
+| The place | Is there a place or a memory behind this one? (His designs start there, see [process.md](process.md). Ask it first on any new surface.) | the world, the material, the idea |
 | The goal | What should someone do before they leave this page? | visitor mode, the one CTA, what the first fold is for |
 | The audience | Who is this for, and what do they already know about it? | register, voice, how much explaining the page does |
 | The idea | Offer two or three directions, each as one plain sentence about what the first screen is. Which is closest? | the `idea:` line, color strategy, hero |
@@ -47,7 +48,7 @@ The direction question is the most useful one in the bank. Two or three sentence
 ## After the answers
 
 - **Play it back in the preflight.** The `read:` and `idea:` lines carry his answers, and the `asked:` line records what was asked and what was assumed. That is the confirmation; do not ask "shall I proceed".
-- **Then build without stopping.** One follow-up question later is fine if something truly blocks. A second round of four is not.
+- **Then build the hero, finish it, and stop to show it.** That pause is his, see [process.md](process.md). After his reaction, build the rest without stopping. One follow-up question later is fine if something truly blocks. A second round of four is not.
 - **An answer is a pin.** What he chose is now a brief override under law 1. Do not drift back to a default halfway through.
 
 ## When to skip intake

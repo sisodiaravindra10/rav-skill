@@ -1,15 +1,17 @@
 ---
 name: rav
 metadata:
-  version: 2.1.0
-description: Ravindra's personal design skill. Reach for it whenever he wants an interface built, redesigned, or improved in his own taste rather than a generic one, even when he does not name it. Covers landing pages, portfolio sections, brand moments, hero sections, product UI and dashboards, consumer mobile screens, components, mockups, and image references. Fires on build, design, generate, redesign, critique, audit, and on the scoped moves polish, bolder, quieter, distill, harden, onboard, animate, colorize, typeset, layout, delight, clarify, adapt, optimize, overdrive, review-motion. Also on /rav, "use rav taste", "build it", "design it", "make it better".
+  version: 3.2.0
+description: Ravindra's personal design skill, the taste layer for any interface he wants in his own hand rather than a generic one. Use it whenever he asks to build, design, redesign, mock up, critique or improve a website, landing page, portfolio piece, hero, brand moment, product UI, dashboard, consumer mobile screen or component, even when he does not name the skill, and for the scoped moves polish, bolder, quieter, distill, harden, onboard, animate, colorize, typeset, layout, delight, clarify, adapt, optimize, overdrive and review-motion on an existing surface. Also on /rav, "use rav taste", "in my style", "make it look like mine". For an award-level or immersive site, pair it with awwwards (it runs build and QA, rav supplies taste). Not for ZopDev-branded deliverables, which the zopdev skills own; not for films and motion graphics; not for non-visual work (refactors, docs, copy-only edits); and never when he says "without rav" or asks for your own judgment instead.
 ---
 
 # rav
 
 Range-flexible frontend design across three registers: editorial **brand**, saturated **kinetic**, utilitarian **product**. Material-first: name what the surface is made of before any visual choice. The register and brief pick the palette; Zop.Dev white-and-orange is one specific look among many, NOT a default. It fires only for Ravindra's own work (see Personal DNA defaults). Never generic, never templated, never AI-slop.
 
-Distilled from the strongest of Ravindra's design skills (impeccable, design-taste-frontend, taste-skill, gpt-taste, taste-design, high-end-visual-design, minimalist, bencium) plus his own DNA across editorial, kinetic/sport, atmospheric, and product registers. This skill is the taste layer: it delegates motion judgment to the Emil Kowalski skills, motion technique to the GSAP skills, and image references to the imagegen skills rather than reinventing any of them.
+Distilled from the strongest of Ravindra's design skills (impeccable, design-taste-frontend, taste-skill, gpt-taste, taste-design, high-end-visual-design, minimalist, bencium) plus his own DNA across editorial, kinetic/sport, atmospheric, and product registers. This skill is the taste layer: it delegates motion judgment to the Emil Kowalski skills, motion technique to the GSAP skills, the award-level build and its QA to `awwwards` and `jury`, and ZopDev brand deliverables to the zopdev skills, rather than reinventing any of them. See Working with other skills.
+
+**Opt-out.** If he says "without rav", "drop rav", or asks for your own judgment, stop using this skill for that task: no preflight, no rules from this file. He has asked for exactly that before, after a rule-led page came out timid.
 
 ## Access gate, do this first, every time
 
@@ -31,6 +33,18 @@ This skill is password-protected. Before reading further or producing ANYTHING (
 
 Almost everything below is a default, not a law. A default names what the category ships when nobody decided. Reaching for one when the axis was free means you were not deciding; naming the override in the read means you were.
 
+## Conviction before compliance
+
+The rules in this file are a floor. They remove mistakes; they do not supply an idea. A page can pass every rule here and still be timid, and timid is the failure he rejects fastest. It has happened with this skill loaded: a SaaS homepage built on a green-bar ledger and dot-matrix metaphor followed the derivation, obeyed the floor, and came out as pale bands, small mono and tables with no hero moment. He threw it out in one word.
+
+So before any rule is applied, the work needs three things, and the preflight states them in the `idea:` line:
+
+- **One idea, sayable in a sentence, that a stranger would repeat.** "The brand color is the whole first screen and the product runs inside it" is an idea. "A clean editorial layout with a ledger motif" is a description.
+- **One dominant thing per fold.** A color field, a headline at real scale, the product itself, a photograph. If the squint test shows five things of equal weight, nothing was decided.
+- **Confidence that matches the subject.** A forward-looking product does not get a nostalgic costume. A clever metaphor that makes the page quieter, smaller or more table-like than the plain version has lost to the plain version.
+
+When a rule below would make the page more timid (shrinking the type, thinning the color, swapping the product for a diagram of the product), the rule is being misread. Scale and commitment are allowed; the rules exist to keep them clean.
+
 ## Pre-flight (mandatory, output before any code or images)
 
 State the block below, then proceed. Lines marked `*` are mandatory always; others apply per mode/register.
@@ -41,10 +55,11 @@ mode:     build | generate | critique | <move>                                  
 register: brand | kinetic | product                                                           *
 visitor:  persuade | operate | read | experience                                              *
 read:     <one line: page kind, audience, vibe, design-system pick, any brief override>        *
+idea:     <one sentence a stranger would repeat, plus the dominant thing in the first fold>    (build + generate, persuade | experience)
 material: <what the surface is made of: "paper", "corrugated metal", "studio photo + grain">   (brand + kinetic only)
 color:    <restrained | committed | full-palette | drenched> + surface / ink / accent           *
 hero:     <full-bleed-photo | centered-display | asymmetric-split | image-with-overlay |
-           live-input | flow-diagram>                                                          (build mode + brand|kinetic only)
+           live-input | flow-diagram | product-stage>                                          (build mode + brand|kinetic only)
 lane:     <soft-wellness | bold-playful | editorial-max | clean-data | material-hero | conversational | warm-journal>   (product register + consumer-mobile app only)
 dials:    variance=N/10 motion=N/10 density=N/10                                               *
 ```
@@ -87,6 +102,8 @@ Baseline `variance=8 motion=6 density=4`. Override from the read, and say so in 
 
 For a new surface or a replacement identity, do not pick the material by vibe. Derive it. Load **[reference/world.md](reference/world.md)** and run the derivation: name the rut, list seven candidate worlds from the audience's actual culture spanning at least three material families, raise the winner against the ones it beat, then commit. Skip the derivation only for a local addition inside an established world, or a precisely specified narrow request.
 
+**The derivation serves the idea, not the other way round.** A world is a source of material, color and proportion. It is not a costume to wear literally. Retro and nostalgic artifacts (ledgers, punch cards, dot-matrix printouts, terminals, blueprints) are the rut for software products: they read as clever in the plan and as a spreadsheet on the screen. If the winning world makes a product page quieter than a plain bold one would be, go back and pick again.
+
 **Calibration.** AI-generated interfaces cluster on a handful of looks whatever the subject: warm cream ground with high-contrast serif display and a terracotta accent; near-black with one neon accent and glowing edges; broadsheet hairlines with italic display serif and small tracked mono labels. All are legitimate when the brief asks for them. Where the aesthetic is free, landing on one means the self-check failed. If someone could guess your aesthetic from the category alone, or from category-plus-avoidance, rework it. Warm, bookish, family, and child-facing subjects come out cream and serif by reflex: treat that first palette as already spent.
 
 ## Color
@@ -112,19 +129,22 @@ Universal rules:
 - Dark mode is composed, not inverted. Design elevation and contrast explicitly.
 - **Premium-consumer palette ban:** for cookware, wellness, artisan, heritage, DTC home goods, the beige-cream ground plus brass/clay/oxblood accent plus espresso ink family is banned as the default reach. Alternates and the full banned hex list live in [reference/tells.md](reference/tells.md).
 
-**Zop.Dev palette (Ravindra's own work only):** white `#FFFFFF`, ink `#0A0A0A`, signature orange `#F58549` (10x10 square, 2px active border, single CTA), sub-brands ZopNight `#2A4494`, ZopDay `#F58549`, ZopCloud `#7FB236` (one per page). Do not apply to other briefs.
+**Product and SaaS marketing leans committed or drenched.** The brand color as a full field in the first fold is the default reach there, not a white page with an accent dot. Restrained is for operate and read surfaces.
+
+ZopDev brand colors are not defined here. They live in the `zopdev-brand` skill; see Personal DNA defaults.
 
 ## Typography
 
 **Faces are objects from the subject's world, chosen in the visitor mode's register.** Operate and Read surfaces are well served by a workhorse UI face; Persuade and Experience surfaces want a face with a point of view.
 
+- **Pick faces that will actually load.** [reference/fonts.md](reference/fonts.md) is a checked roster of Google Fonts sorted by the job each does, with stand-ins for the paid faces named below, Devanagari families, pairings and loading rules. Load it when choosing type. A paid face declared without its files falls back to the system font, which is no typography at all.
 - **Display, picked by register.** Editorial-brand: Space Grotesk, PP Editorial New, or a clean grotesk. Atmospheric or luxury: an editorial serif (Newsreader, Instrument Serif, PP Editorial). Do not reach for Space Grotesk by reflex, and do not reach for a serif purely because the subject sounds creative. Alternates worth rotating in: PP Neue Montreal, Cabinet Grotesk, GT Walsheim, Migra, GT Sectra, Reckless Neue, Tiempos Headline, Recoleta.
 - **Not the display face:** Inter, Roboto, Arial, Open Sans, system-ui. Helvetica is fine for a true Swiss or print brief. Serif never carries a dashboard or software UI.
 - **Kinetic display:** bold condensed carries the energy. Clash Display, Druk, Anton, Migra, Monument Extended.
 - **Body:** a workhorse. Inter, Geist Sans, Switzer, SF Pro. Line-height 1.6, measure 65-75ch for prose. Never absolute black.
-- **Mono:** JetBrains Mono, Geist Mono, SF Mono, for code, data, and measurement. Not as a costume for "technical".
+- **Mono:** JetBrains Mono, Geist Mono, SF Mono, for code, data, and measurement. Not as a costume for "technical". On a persuade surface mono is a label, never a texture: once small mono carries body copy, table cells and captions together, the page reads as a spreadsheet.
 - **Pair, do not solo.** Display plus body plus mono. One family for everything is a product-register move, not a brand one.
-- **The 2-line rule.** H1 fits 2 lines at desktop and never exceeds 3 below it. `max-w-5xl` or `max-w-6xl` containers, `clamp(2.5rem, 5vw, 5.5rem)`. A 4-line desktop headline is a font-size error, never a copy-length error. Display caps at 6rem, tracking floor -0.04em.
+- **The 2-line rule.** H1 fits 2 lines at desktop and never exceeds 3 below it. `max-w-5xl` or `max-w-6xl` containers, `clamp(2.5rem, 5vw, 5.5rem)`. A 4-line desktop headline is a font-size error, never a copy-length error. Display caps at 6rem by default, tracking floor -0.04em. On persuade and experience surfaces a short headline (five words or fewer) may run to 9rem, `clamp(3rem, 9vw, 9rem)`, as long as the 2-line rule and the first-viewport rule still hold. Huge type is welcome; wrapped type is the error.
 - **Extreme contrast** on brand and kinetic: display 4-6rem against body 1rem, obvious scale and weight steps, no middle ground. Product register uses a tighter 1.125-1.2 ratio and a fixed rem scale, not clamp.
 - **Same-family emphasis.** Italic or bold of the same face. Never inject a serif word into a sans headline for interest.
 - **Italic descender clearance.** Any italic display word with `y g j p q` needs `leading-[1.1]` minimum plus `pb-1` reserve, or the descender clips.
@@ -156,10 +176,11 @@ State the pick in the preflight `hero:` line. Do not default to left-aligned edi
 
 1. **full-bleed-photo**: photography owns the hero, H1 over a gradient overlay, type restrained. Kinetic, sport, atmospheric, travel.
 2. **centered-display**: massive display type on a near-empty surface, one accent. Type carries everything. Zop.Dev, brutalist, editorial, manifesto.
-3. **asymmetric-split**: text one half, image or interactive the other, massive negative space between. Default for SaaS landings when the photography is not strong enough for full-bleed.
+3. **asymmetric-split**: text one half, image or interactive the other, massive negative space between. For SaaS when the product has no single screen worth staging.
 4. **image-with-overlay**: image as the background of a constrained content card, 1px hairline framing. Case studies, manifestos, portfolio pieces.
 5. **live-input**: the product's real entry action at hero scale, working, as the first interactive element. Prompt boxes, search, email capture fused to its CTA. AI tools, SaaS with one entry action.
 6. **flow-diagram**: real UI fragments as nodes on a 1px routed line, mono uppercase labels sitting on the connectors. Orchestration, routing, and aggregation products, where the value IS the path.
+7. **product-stage**: the brand color owns the whole fold as a field, the headline runs at real scale, and the real product sits large on that field, legible and working or captured from the running app. The default for product and SaaS marketing. Recipe in [reference/layouts.md](reference/layouts.md).
 
 Pick by register and material first. The archetype follows the material, not taste. Centered heroes are avoided above `variance=4` unless the message itself is the design, or a real artifact sits directly under the CTA pair carrying the variance the type gave up.
 
@@ -180,6 +201,7 @@ Photography is a first-class design element in brand and kinetic, not decoration
 - **Logo walls:** real SVG marks (Simple Icons `https://cdn.simpleicons.org/{slug}/{hex}`, devicon) or a generated monogram for invented brands. Never plain text wordmarks. Logos only, no category labels underneath. Works in both themes. Lives under the hero, never inside it.
 - **Icons are drawn**, from one real library at one consistent stroke and weight (Phosphor, Radix, Remix, Tabler, or authored SVG). No unicode glyphs or emoji standing in for an icon system. Thin-stroke Lucide, Feather, or Material as the only icon system is a default to break on brand and kinetic surfaces; it is fine in product chrome when the brief calls for it.
 - **Geometric masks never stand in for organic contours.** A circle or polygon approximating a photographic subject's edge reads worse than omitting the effect. Derive an alpha matte or produce a real cut-out.
+- **Product UI shown is the real product.** A capture from the running app at legible scale, or the real component mounted and working. Show it large: a screen shrunk until nothing reads is decoration. If no real UI exists yet, build one real working fragment of it rather than drawing a pretend dashboard, and say which it is.
 - **Banned:** raw saturated stock, "people in a meeting", "diverse team smiling at laptop", infinite carousels of product thumbnails, div-based fake dashboards and terminals.
 
 ## Copy and content
@@ -187,17 +209,20 @@ Photography is a first-class design element in brand and kinetic, not decoration
 - **Section shape by default:** headline 8 words or fewer, sub-paragraph 25 words or fewer, plus one visual OR one CTA. More has to be earned by the section's job.
 - **Long lists need a different component, not a longer list.** Above five items reach for grouped columns, a card grid, tabs, an accordion, scroll-snap pills, a carousel, or a marquee. A ten-row spec table with a hairline under every row is the laziest layout there is. Never `border-t` AND `border-b` on every row.
 - **No fabricated data.** Never invent metrics, uptime percentages, response times, deploy counts, benchmark numbers, prices, or customers. Fake-precise numbers (`92%`, `4.1x`, `5.8 mm`) are either real, explicitly labeled mock, or gone. "BY THE NUMBERS" tiles filled with invented figures are banned outright. In greenfield work, illustrative content is fine when labeled synthetic and listed for replacement; commercial and factual claims are not.
+- **Write like a person.** [reference/voice.md](reference/voice.md) names eighteen sentence shapes that mark copy as machine-made (the false contrast, the triad, the staged question, the inflated verb and the rest) and gives the pass to run on every string. Load it before writing headlines or body copy. Banned words catch the cheap cases; the shapes catch what survives a synonym swap.
 - **Copy self-audit before shipping.** Re-read every visible string: headlines, subheads, labels, buttons, body, captions, alt text, footer, errors. Rewrite anything grammatically broken, with unclear referents, with forced metaphors, or that reads like an LLM trying to sound thoughtful. Boring and functional beats cute and wrong.
 - **One copy register per page.** Do not mix technical mono, editorial prose, and marketing punch unless the brand voice genuinely does.
 - **One label per CTA intent.** "Get in touch" plus "Let's talk" plus "Start a project" on one page is a fail. Pick one and use it in nav, hero, and footer. CTA labels are 1 to 3 words and never wrap at desktop.
 - **Quotes:** max 3 lines of body, real typographic quote marks or none, attribution as name plus role plus optional company, never name only, never an em-dash.
+- **A quote ships only after its source has been read.** A screenshot is where a quote arrived, not where it came from. Open the source, match the wording and the speaker, then build. If the source cannot be reached, say so before the asset exists. Prefer a named person whose words are publicly visible over anything attributed to an organisation. A launch film was once six hours from posting with a line pinned on a publication that never wrote it.
 - **Controls name their action. Errors name the problem and the recovery.** Persistent labels, never placeholder-as-label. Label above input, error below.
-- Banned copy words: elevate, seamless, unleash, next-gen, game-changer, delve, powerful, leverage, amazing, revolutionize. Banned names: John Doe, Acme, Nexus, Lorem Ipsum. **Zero em-dashes and zero en-dash separators anywhere visible.** Hyphen only.
+- Banned copy words: elevate, seamless, unleash, next-gen, game-changer, delve, powerful, leverage, amazing, revolutionize. Banned names: John Doe, Acme, Nexus, Lorem Ipsum. **Zero em-dashes and zero en-dash separators anywhere visible.** Do not swap one for a hyphen blindly: rewrite the join as a comma (an aside), a colon (a gloss or list), or a full stop (two claims). Real exceptions: a `Track - Artist` separator, a no-data placeholder, numeric ranges, code comments. **Never the section-sign glyph (U+00A7)** in UI, labels or docs; write "section 4" or let the number stand alone. Before saying a deliverable is ready, grep every surface that ships with it (page, captions, alt text, metadata, README), not only the file you edited.
 
 ## Motion
 
-- **Easing:** `cubic-bezier(0.16, 1, 0.3, 1)` for entry, `cubic-bezier(0.32, 0.72, 0, 1)` for spring-feel hovers. Never `linear`, never default `ease-in-out`, never bounce or elastic by reflex.
+- **Easing:** `cubic-bezier(0.16, 1, 0.3, 1)` for entry, `cubic-bezier(0.32, 0.72, 0, 1)` for spring-feel hovers. Never `ease-in` on interface motion, never the default `ease-in-out` keyword, never bounce or elastic by reflex. `linear` only for constant motion such as a marquee or a progress fill.
 - **Duration:** 100-150ms immediate feedback, 150-300ms routine state change, 300-500ms layout or overlay, 500-800ms an authored entrance, 2-4s a cinematic brand moment. Exit faster than entrance. Long feedback reads as latency, and an untransitioned instant state flip reads as a defect, not as restraint.
+- **The small motion is a floor, not a flourish.** [reference/micro.md](reference/micro.md) carries the control-scale rules: press feedback on every pressable, hover only on devices that hover, nothing entering from `scale(0)`, popovers growing from their trigger, tooltips that wait once, transitions over keyframes for anything reversible, and no animation at all on keyboard actions or things seen hundreds of times a day. Load it before writing any interactive component. A page with the right layout and no press states feels dead.
 - **One authored moment, not scattered effects,** and not one identical entrance bolted onto every section. Sibling stagger is for lists that appear as lists, with a capped total delay.
 - **Reach past transform and opacity.** Blur, backdrop-filter, clip-path, mask, and shadow belong to the palette when they stay smooth. Pick the property for what the transition communicates: shared-element and FLIP for continuity, blur and depth for focus, mask and clip for reveal, color and distortion for material energy.
 - **GPU only where it matters:** never casually animate `top/left/width/height`. `will-change` only during known animation. Bound blur, filter, canvas, and shader work to isolated regions.
@@ -221,7 +246,13 @@ rav sets the taste: feel, duration, restraint, and whether the moment deserves m
 | `improve-animations` | auditing a whole codebase's motion and getting a prioritized list |
 | `find-animation-opportunities` | finding surfaces that should move and do not, and rejecting the ones that should not |
 | `animation-vocabulary` | you can describe the effect but cannot name it |
-| `emil-design-eng` | the polish philosophy underneath all of the above, plus component-level detail |
+| `choreograph` | several elements entering or changing together: what moves, in what order, how much they overlap, what stays still |
+| `gestures` | anything dragged, swiped, flung, held or dismissed by hand. Pair with `apple-design` for the physical feel |
+| `animation-performance` | motion that stutters or drops frames, or choosing which property to animate |
+| `remove-animations` | the app feels slow or busy and motion may be the cause. It only subtracts |
+| `mobile-native` | a web page that should feel installed on a phone: sticky hover, tap flash, input zoom, the notch |
+| `break-ui` | stress-testing a component with worst-case content before calling it done |
+| `emil-design-eng` | the polish philosophy underneath all of the above, plus component-level detail. Its floor is already distilled into [reference/micro.md](reference/micro.md) |
 
 **Mechanism, the GSAP skills.** Once the decision is made: `gsap-scrolltrigger` for scroll-driven, pinned, scrubbed, parallax; `gsap-timeline` for choreographed sequences; `gsap-react` for React and Next (useGSAP plus cleanup); `gsap-frameworks` for Vue and Svelte; `gsap-plugins` for per-letter reveals, Draggable, Flip, Observer, physics; `gsap-performance` for jank and FPS.
 
@@ -242,6 +273,25 @@ For brand and kinetic hero moments (landing pages, portfolio sections, brand rev
 For product chrome, invert all of this: 150-250ms snap, no anticipation, no judder, no page-load choreography.
 
 Load `apple-design` alongside this protocol. Its spring, momentum, and interruptible-transition material is the mechanism behind the weight and settle described here, and its gesture rules cover the drag and swipe cases this protocol does not.
+
+## Working with other skills
+
+rav is the taste layer. When another skill owns the process or the brand, let it lead and keep rav for the judgment calls. Say in one line which skill is being used and why before starting.
+
+| situation | who leads | what rav still does |
+|---|---|---|
+| award-level, immersive, "could win site of the day" | `awwwards` runs concept, build, its QA scripts and a fresh critic | the idea, the world, the three laws, his DNA, the tells filter |
+| scoring a site without changing it | `jury` | nothing, unless he then asks for fixes |
+| anything ZopDev, ZopNight, ZopDay, ZopCloud branded | the owning zopdev skill (`zopdev-landing-page`, `zopdev-sales`, `zopdev-email`, `zopdev-ads`, `zopdev-social-graphics`), with `zopdev-brand` as the source of truth | stays out, unless he explicitly asks for a rav take on it |
+| WebGL, shaders, 3D scenes | the three.js and r3f skills for mechanism | whether the effect earns its place, and the material |
+| films, ads, motion graphics | `remotion`, `zop-remotion-video`, `hyperframes` | not a rav job |
+| page copy from scratch, positioning, headline options | `copywriting` | the voice pass in [reference/voice.md](reference/voice.md) on whatever it writes |
+| a page that is not converting | `cro` | keeps the fixes inside the page's world |
+| labels, errors, empty states | `design:ux-copy` | the voice pass |
+| rewriting a draft that reads as machine-written | `humanizer` | his own rules on top: zero em-dashes, no section-sign glyph |
+| one narrow library choice | `pick-ui-library` | nothing |
+
+Image references in generate mode use whatever image generation tool the environment has. There is no dedicated imagegen skill installed; the process in [reference/modes.md](reference/modes.md) is self-contained.
 
 ## Product register depth (operate and read surfaces)
 
@@ -297,9 +347,9 @@ Move verbs are scoped refinements of a surface that already shipped. Each has a 
 |---|---|---|
 | `polish` | refine | final pass before shipping: triage defects, complete the whole path |
 | `bolder` | refine | raise one section to the conviction the rest already implies |
-| `quieter` | refine | reduce intensity without losing the point of view |
+| `quieter` | refine | reduce intensity without losing the point of view. Loads `remove-animations` when the noise is motion |
 | `distill` | refine | strip to essence, remove what does not earn its place |
-| `harden` | refine | production reality: long text, i18n, RTL, errors, offline, edge cases |
+| `harden` | refine | production reality: long text, i18n, RTL, errors, offline, edge cases. Loads `break-ui` |
 | `onboard` | refine | first-run flows, empty states, activation |
 | `animate` | enhance | add purposeful motion with a stated thesis. Loads `animate`, or `animate-expo` on native |
 | `colorize` | enhance | add strategic color as hierarchy, meaning, atmosphere |
@@ -308,8 +358,8 @@ Move verbs are scoped refinements of a surface that already shipped. Each has a 
 | `delight` | enhance | one earned moment of product character |
 | `overdrive` | enhance | push past conventional limits, propose 2-3 directions first and wait |
 | `clarify` | fix | rewrite UX copy, labels, errors |
-| `adapt` | fix | fix a specific device or breakpoint class |
-| `optimize` | fix | diagnose and fix UI performance |
+| `adapt` | fix | fix a specific device or breakpoint class. Loads `mobile-native` for phones |
+| `optimize` | fix | diagnose and fix UI performance. Loads `animation-performance` when the cost is motion |
 | `review-motion` | evaluate | critique motion that already ships. Loads `review-animations`, or `improve-animations` for a whole codebase |
 
 Every move that changes code ends by handing off to `polish`. The two exceptions: `review-motion` reports and changes nothing, and `overdrive` never starts at all until the user has picked one of the directions it proposed.
@@ -323,24 +373,31 @@ Verify in bounded passes, never an open loop. The ceiling covers the whole cycle
 3. Fix everything that round showed, in one batch.
 4. Confirm with at most one more round. Then stop.
 
-Both inspection rounds start with `scripts/verify.mjs`, source and browser. Eyes are for
-the half it cannot decide.
+Both inspection rounds start with `scripts/verify.mjs`, source and browser. Eyes are for the half it cannot decide.
+
+On a whole page or site, the second round is better done by a fresh critic than by you: a subagent given only the screenshots and the brief, with no knowledge of what you intended. On the portfolio rebuild five such critics each found something the author had looked straight past, including a regression the author introduced. Ask it first whether it can say the idea back in a sentence. If it cannot, the problem is upstream of every rule here.
 
 Open-ended self-QA burns money doing worse what a critique pass does better. A clean automated scan is a floor, not proof. Never claim a check ran that did not.
 
 ## Personal DNA defaults (Ravindra's own work only)
 
-Apply ONLY when the brief is for Ravindra's own surfaces: Zop.Dev (homepage, brand kit, sub-brands), the personal portfolio at `rav/portfolio`, his Mac apps and toys (crew, notchling, pop, shutter, worklog, strata, drift, git-city, and the rest of the build queue), his link-toys, Laik, or anything built for him personally. His Dribbble range covers sport, kinetic, atmospheric, and consumer-mobile: those are NOT Zop.Dev DNA territory.
+His own surfaces are the personal portfolio, the Deskmates store and its apps (Crew, Notchling, Pop, Chit), the Mac build queue, the link-toys, Laik, and anything built for him personally. Client work, mock projects, sample components and generic asks never get his DNA: pick palette and type from the register and brief.
 
-For everything else (client work, mock projects, sample components, generic asks, kinetic briefs) pick the palette and type system from the register and brief. Do not auto-apply Zop.Dev white-paper-and-orange to a Valorant brief or a Karnataka Tourism brief.
+**Each of his projects already has its own world, and that world wins (law 3).** The live portfolio is the Suryanagari system: one sun, morning blue to chalk to night, Archivo wide display, JetBrains Mono for data only. Monolith is obsidian and acid green on purpose. RavOS is a retro OS, the Sisodia Times a broadsheet. Read the project's DESIGN.md or its tokens before touching it and build inside what is there. Do not repaint any of them in the defaults below.
 
-When the condition is met:
-- Surface: `--paper #FFFFFF` light or `#0F0F12` dark. Ink `#0A0A0A` is text, not a surface.
-- Type: Space Grotesk display, Inter body, JetBrains Mono labels. A pinned brand commitment for his surfaces, never carried into a client brief.
+**The defaults apply only to a new personal surface that has no world yet:**
+- Surface: paper `#FFFFFF` light or `#0F0F12` dark. Ink `#0A0A0A` is text, not a surface.
+- Type: Space Grotesk display, Inter body, JetBrains Mono labels.
 - Accent: orange `#F58549`, scarce. A 10x10 signature square, a 2px active border on tabs, one CTA per view.
-- Sub-brand colors only when the section is explicitly about that sub-brand.
-- Voice: terse, specific, no em-dashes, no fluff words, never the section symbol.
-- Brand moments lean cinematic and physical (corrugated shutter, weight, anticipation). Tool chrome stays snappy.
+
+**What holds across everything of his, whatever the world:**
+- Voice: terse, specific, no em-dashes, no fluff words, never the section-sign glyph.
+- Brand moments lean cinematic and physical (corrugated shutter, weight, anticipation, 2 to 4 seconds). Offered a snappy option and a cinematic one for a personal moment, lead with the cinematic one. Tool chrome stays snappy.
+- Product and SaaS marketing is bold and product-led: color field, huge type, the real product large. See Conviction before compliance.
+- Photographs keep their subject clear. On his portfolio no text sits over a photo.
+- Indian context is specific when it is there: Jodhpur, not "a desert city".
+
+**ZopDev work is not personal DNA.** ZopDev, ZopNight, ZopDay and ZopCloud have their own brand system and their own skills. Route there; see Working with other skills.
 
 ## Pre-output checklist
 
@@ -348,11 +405,13 @@ Run silently against every output.
 
 **Direction**
 - [ ] RAV_PREFLIGHT emitted; register, visitor mode, and color strategy chosen before any visual decision
+- [ ] (persuade/experience) the idea is one sentence a stranger would repeat, and each fold has one dominant thing
+- [ ] No rule was used as a reason to make the page smaller, paler or more table-like
 - [ ] Brief overrides honored and named; no redirect toward habit
 - [ ] Refinement vs redesign classified; scope respected literally
 - [ ] (new world) derivation ran: rut named, seven candidates, three material families, one committed direction
 - [ ] Aesthetic is not guessable from the category alone
-- [ ] Palette from register and subject; Zop.Dev white plus orange ONLY on his own work
+- [ ] Palette from register and subject; an existing project keeps its own world; ZopDev work went to the zopdev skills
 
 **Composition**
 - [ ] (brand/kinetic) material named; (build) a hero archetype picked
@@ -365,12 +424,16 @@ Run silently against every output.
 
 **Substance**
 - [ ] Real images sourced in priority order; no div-fake screenshots, no hand-rolled decorative SVG, no generic stock
-- [ ] Zero fabricated metrics, prices, customers, or fake-precise specs
-- [ ] Copy self-audit done; one CTA label per intent; no banned words; zero em-dashes and en-dash separators
+- [ ] Zero fabricated metrics, prices, customers, or fake-precise specs; every quote traced to a source that was read
+- [ ] Product UI on the page is the real product, shown large enough to read
+- [ ] Copy self-audit done; one CTA label per intent; no banned words; zero em-dashes, en-dash separators or section-sign glyphs, grepped across every shipped surface
+- [ ] Every declared font loads (checked in the browser); the pairing is not a repeat of the last build
+- [ ] Voice pass run on every visible string: cut test, swap test, the eighteen patterns, read aloud
 - [ ] Display face fits the register, not Space-Grotesk-by-reflex; H1 at 2 lines desktop, 3 maximum below
 - [ ] States shipped: hover, focus, active, disabled, loading, empty, error
 - [ ] Contrast measured in both themes; keyboard focus visible; touch targets 44px
 - [ ] Motion has one authored moment, custom easing, reduced-motion path, no scroll listeners
+- [ ] Micro floor met: every pressable has press feedback, hover is gated to hover devices, nothing enters from scale(0), popovers grow from their trigger
 - [ ] Motion decided with the Emil skills before being built with GSAP, not the reverse
 - [ ] Browser surfaces themed: selection, caret, scrollbars, focus rings, tabular numerals
 - [ ] Nothing from [reference/tells.md](reference/tells.md) survived

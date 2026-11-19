@@ -39,6 +39,7 @@ Override only when the brief names those colors, or the identity is genuinely vi
 - Brand micro-meta sub-eyebrows: `Marrow . No. 01 . The 6-quart`.
 - A decoration text strip at the hero bottom: `BRAND. MOTION. SPATIAL.`, `TYPE / FORM / MOTION`, `ESTD. 2018 . LISBON`. Allowed only when the strip carries real navigable links or real status.
 - Scroll cues: `Scroll`, `down-arrow scroll`, `Scroll to explore`, animated mouse-wheel icons. The visitor knows what scroll is.
+- **The spreadsheet page.** A marketing page made of pale alternating bands, small mono type and tables, usually dressed as a ledger, printout, terminal or blueprint. No dominant color, no headline at scale, no product in sight. It passes every mechanical rule and reads as timid. Rebuild around a color field, real scale and the real product.
 - Div-based fake product UI: fake task lists, fake terminals, fake dashboards built from styled divs. The single loudest tell. Use a real screenshot, a generated image, a real mini component, or nothing.
 - Fake version footers inside fake screenshots: `v0.6.2-rc.1`, `last sync 4s ago . main`.
 - A trust micro-strip, pricing teaser, or logo wall stuffed into the hero row.
@@ -78,6 +79,8 @@ Override only when the brief names those colors, or the identity is genuinely vi
 - Invented dashboards of invented data: `SYSTEM PERFORMANCE METRICS`, `KEY STATISTICS`, `BY THE NUMBERS` filled with numbers nobody gave you. Use `[metric]` placeholders instead.
 - Two CTAs with the same intent on one page.
 - Cute AI copy generally: forced metaphors, passive-aggressive humility, mock-poetic micro-meta. Boring and functional beats cute and wrong.
+- A quote or testimonial whose source nobody opened, and any line attributed to a publication rather than a named person. Trace it or cut it.
+- The section-sign glyph (U+00A7) anywhere. Write "section 4".
 
 ## Layout tells
 

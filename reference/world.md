@@ -33,6 +33,8 @@ Write down, in one line each:
 
 Both of those last two are the rut. They stay out of the candidate list. A brief that paints its own picture (a product name, a titled artifact, a governing metaphor) adds its literal reading to the rut too: spend at most one candidate on it and derive the rest from elsewhere in the audience's world.
 
+For a software product, retro office and computing artifacts (ledger paper, dot-matrix printouts, punch cards, CRT terminals, blueprints) are part of the rut as well. They win derivations on cleverness and lose on the screen, where they turn into pale bands and small mono. And whatever wins is raw material for color, proportion and texture, not a costume to render literally: the test is whether the result is bolder than a plain color-field-and-product page would have been. If it is quieter, it lost.
+
 ## 4. List seven worlds from the audience's culture
 
 Seven concrete visual systems, artifacts, places, or rituals the audience knows by heart. One line each on why it resonates and how it can carry the mechanism. Order by resonance.

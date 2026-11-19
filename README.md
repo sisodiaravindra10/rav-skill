@@ -2,7 +2,7 @@
 
 A personal design skill for Claude Code. It catches the defaults you were about to ship.
 
-Three registers, sixteen scoped moves, and a sixty-three item production-tell list that
+Three registers, sixteen scoped moves, and a sixty-six item production-tell list that
 runs as the last filter before anything ships.
 
 <!-- tell count: grep -c '^- ' reference/tells.md, minus the 3 hex-value bullets under Palette bans -->
@@ -105,17 +105,20 @@ seconds after load so entrance animations have settled.
 ```
 SKILL.md                      the decision spine, always loaded
 reference/craft-floor.md      mechanical quality floor, loaded before editing UI
-reference/tells.md            63 production tells, the last filter before delivery
+reference/tells.md            66 production tells, the last filter before delivery
 reference/world.md            visual-world derivation and the design-system map
 reference/moves.md            the sixteen move playbooks
 reference/modes.md            build / generate / critique output shapes and scoring
 reference/redesign.md         redesign protocol
 reference/mobile-aesthetics.md  seven consumer-app lanes
 reference/layouts.md          hero and section composition recipes, sources ranked
+reference/fonts.md            a checked Google Fonts roster by job, pairings, loading rules
+reference/voice.md            eighteen machine-copy sentence shapes and the pass that removes them
+reference/micro.md            the control-scale motion floor: press, hover, popovers, tooltips
 scripts/verify.mjs            the craft floor, made executable
 ```
 
-Progressive disclosure: the spine stays under 400 lines and the playbooks load only when
+Progressive disclosure: the spine stays under 450 lines and the playbooks load only when
 the work needs them.
 
 ## What it delegates
@@ -123,9 +126,12 @@ the work needs them.
 The skill is the taste layer and defers the rest rather than reinventing it:
 
 - **Motion judgment** goes to the Emil Kowalski skills (`animate`, `apple-design`,
-  `review-animations` and friends).
+  `choreograph`, `gestures`, `review-animations` and friends). Their control-scale floor
+  is distilled into `reference/micro.md` so it applies on every build.
 - **Motion technique** goes to the GSAP skills.
-- **Image references** go to `imagegen-frontend-web` and `-mobile`.
+- **Award-level builds** go to `awwwards`, with `jury` for scoring.
+- **Copy** goes to `copywriting`, and `humanizer` for rewriting a machine-sounding draft.
+- **Image references** use whatever image generation tool the environment has.
 
 The ordering rule that matters: **decide with Emil, build with GSAP**, never the reverse.
 

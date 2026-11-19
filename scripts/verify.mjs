@@ -21,8 +21,12 @@ const SKIP_DIR = new Set(["node_modules", "dist", "build", ".git", ".next", "out
 
 const RULES = [
   { id: "em-dash", severity: "error",
-    why: "Zero em dashes and zero en-dash separators anywhere visible. Hyphen only.",
+    why: "Zero em dashes and zero en-dash separators anywhere visible. Rewrite the join as a comma, colon or full stop.",
     test: (l) => /[—]|\s[–]\s/.test(l) },
+
+  { id: "section-sign", severity: "error",
+    why: "The section-sign glyph is banned everywhere in his work. Write the word section, or let the number stand alone.",
+    test: (l) => /\u00A7|&sect;|&#167;|&#xA7;/i.test(l) },
 
   { id: "h-screen", severity: "error",
     why: "h-screen jumps on iOS Safari. Use a dvh rule with a vh fallback.",
@@ -78,6 +82,18 @@ const RULES = [
     why: "Filler words. Use a concrete verb.",
     test: (l) => /\b(elevate|seamless|unleash|next-gen|game-changer|delve|revolutioni[sz]e)\b/i.test(l) },
 
+  { id: "scale-from-zero", severity: "warning",
+    why: "Nothing enters from nothing. Start from scale(0.95) with opacity 0. See reference/micro.md.",
+    test: (l) => /scale\(\s*0\s*\)|\bscale-0\b(?!\.)|scale:\s*0\s*[,}]/.test(l) },
+
+  { id: "ease-in-ui", severity: "warning",
+    why: "ease-in hesitates at the moment the person is watching. Use a custom ease-out. See reference/micro.md.",
+    test: (l) => /(transition|animation)[^;{]*[\s,]ease-in(?!-out)\b/.test(l) || /\bease-in\b(?!-out)["'`\s]*$/.test(l) && /class/.test(l) },
+
+  { id: "slop-phrase", severity: "warning",
+    why: "A sentence shape that marks copy as machine-made. See reference/voice.md and say the concrete thing instead.",
+    test: (l) => /\b(not just (a|an|another)\b|more than just\b|whether you(['’]re| are)\b|in today['’]s\b|in the age of\b|let['’]s (dive|face it)|here['’]s the thing|the best part\?|the result\?|at its core\b|take (it|your \w+) to the next level|unlock (your|the)\b|supercharge|effortlessly|reimagin(e|ed|ing)\b|cutting[- ]edge|world[- ]class|best[- ]in[- ]class|we get it\b|simple as that|say goodbye to|look no further)/i.test(l) },
+
   { id: "placeholder-identity", severity: "warning",
     why: "Invent contextual names, not Acme and John Doe.",
     test: (l) => /\b(John Doe|Jane Doe|Acme|Lorem ipsum)\b/i.test(l) },
@@ -125,7 +141,16 @@ function scan(paths) {
 
 const BROWSER_PROBE = String.raw`
 (() => {
-  const num = s => (String(s).match(/[\d.]+/g) || []).map(Number);
+  // getComputedStyle keeps oklch(), lab(), color() and color-mix() as authored, so
+  // reading digits out of the string gives nonsense. Paint the colour and read the pixel.
+  const _cv = document.createElement("canvas"); _cv.width = _cv.height = 1;
+  const _cx = _cv.getContext("2d", { willReadFrequently: true }); const _seen = new Map();
+  const num = s => { s = String(s);
+    if (!/^(oklch|oklab|lab|lch|color|color-mix|hsl|hwb)\(/i.test(s)) return (s.match(/[\d.]+/g) || []).map(Number);
+    if (_seen.has(s)) return _seen.get(s);
+    _cx.clearRect(0, 0, 1, 1); _cx.fillStyle = "rgba(0,0,0,0)"; _cx.fillStyle = s; _cx.fillRect(0, 0, 1, 1);
+    const d = _cx.getImageData(0, 0, 1, 1).data; const v = [d[0], d[1], d[2], +(d[3] / 255).toFixed(3)];
+    _seen.set(s, v); return v; };
   const lum = ([r,g,b]) => { const f = x => { x/=255; return x<=0.03928 ? x/12.92 : Math.pow((x+0.055)/1.055, 2.4); };
     return 0.2126*f(r) + 0.7152*f(g) + 0.0722*f(b); };
   const over = (fg, a, bg) => fg.map((c,i) => c*a + bg[i]*(1-a));
@@ -232,6 +257,7 @@ const BROWSER_PROBE = String.raw`
   let node, dashes = 0;
   while ((node = walker.nextNode())) if (/[—]/.test(node.textContent)) dashes++;
   if (dashes) add("em-dash-rendered", dashes + " text node(s) contain an em dash", null);
+  if (/\u00A7/.test(document.body.innerText)) add("section-sign-rendered", "the section-sign glyph renders on the page", null);
 
   // 10. content that only exists once script runs
   // a deliberately closed overlay is not a broken reveal gate: it declares itself

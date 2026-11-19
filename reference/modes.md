@@ -24,14 +24,15 @@ Where the skill fired:
 
 1. **Classify the work.** New surface or replacement world, whole surface inside an established world, or a local addition. Only the first runs [world.md](world.md). A local addition inherits its surface and changes nothing else.
 2. **Pick the foundation honestly.** One design system per project, from the map in world.md. Verify every dependency exists in `package.json` before importing, and print the install command when it does not. Never reinvent CSS for something with an official package.
-3. **Scaffold the world.** Color strategy and palette, type roles, spacing scale, radius system, all locked before any component. Theme lock, color lock, shape lock stated once and obeyed everywhere.
-4. **Compose.** Hero archetype first, then the section families. Count the layout families as you go: eight sections need at least four. Bento cells equal content items exactly.
-5. **Source the visuals** in the priority order from SKILL.md's Imagery section. Generate before hand-rolling. Never a div-based fake screenshot.
-6. **Choreograph.** Decide with `animate` (or `animate-expo`, or `apple-design` for anything gestural or physical), then build with the relevant GSAP skill. One authored moment, custom easing, staggered entry where the content is genuinely a list, reduced-motion path. If `register=brand|kinetic` and the brief invokes a physical thing, run the Cinematic hero protocol.
+3. **Scaffold the world.** Pick type from [fonts.md](fonts.md). Color strategy and palette, type roles, spacing scale, radius system, all locked before any component. Theme lock, color lock, shape lock stated once and obeyed everywhere.
+4. **Compose.** State the idea in one sentence before any markup; if it reads as a description rather than an idea, stop and find one. Then hero archetype, then the section families. Count the layout families as you go: eight sections need at least four. Bento cells equal content items exactly.
+5. **Source the visuals** in the priority order from SKILL.md's Imagery section. Generate before hand-rolling. Never a div-based fake screenshot. Product UI is a capture of the running app or the real component, shown large.
+6. **Choreograph.** Load [micro.md](micro.md) for the control-scale floor. Decide with `animate` (or `animate-expo`, or `apple-design` for anything gestural or physical), then build with the relevant GSAP skill. One authored moment, custom easing, staggered entry where the content is genuinely a list, reduced-motion path. If `register=brand|kinetic` and the brief invokes a physical thing, run the Cinematic hero protocol.
 7. **Load [craft-floor.md](craft-floor.md)** immediately before writing the UI and build against it silently.
-8. **Ship real working code.** No placeholder copy, no `TODO`, no half-finished sections, no fabricated metrics.
-9. **Verify in bounded passes.** Build fully, inspect once batched (desktop and mobile, both themes, real content, the states that exist), fix everything that round showed in one batch, confirm with at most one more round, stop.
-10. **Run [tells.md](tells.md)** as the final filter, then the SKILL.md pre-output checklist.
+8. **Write the copy with [voice.md](voice.md) open,** then run its pass on every string.
+9. **Ship real working code.** No placeholder copy, no `TODO`, no half-finished sections, no fabricated metrics.
+10. **Verify in bounded passes.** Build fully, inspect once batched (desktop and mobile, both themes, real content, the states that exist), fix everything that round showed in one batch, confirm with at most one more round, stop.
+11. **Run [tells.md](tells.md)** as the final filter, then the SKILL.md pre-output checklist.
 
 ---
 
@@ -52,7 +53,7 @@ Where the skill fired:
 - <3 to 4 bullets>
 ```
 
-**Process.** This mode pulls its structure from `imagegen-frontend-web` (and `imagegen-frontend-mobile` for app screens). Defer to them for full art-direction depth. The load-bearing subset:
+**Process.** Use whatever image generation tool the environment offers. The steps below are the whole method; no separate imagegen skill is installed.
 
 1. **Commit to a section count out loud,** then one horizontal image per section. Never compress multiple sections into one frame. With no count given: hero = 1, landing = 6, full site = 8, mobile flow = one screen per frame. Label each "Section X of N: <name>".
 2. **Lock one palette, one type system, one hero scale** (giant, mid, mini) before describing any image. State surface, ink, accent, texture upfront and hold it across the whole set.
@@ -62,7 +63,7 @@ Where the skill fired:
 6. **Subject-specific imagery.** The actual stadium, the actual terrain, the actual object. No category stand-ins.
 7. **Continuity.** Every frame reads as one brand: same palette, type scale, CTA family, radius language, image grade. Variation lives in anchor, background mode, and section size, never in identity.
 8. No text or wordmarks on banner-style images. They sit alongside the H1, not compete with it.
-9. **Mobile.** Frame app screens in a subtle phone mockup, keep tap targets and caption sizes readable, defer to `imagegen-frontend-mobile`.
+9. **Mobile.** Frame app screens in a subtle phone mockup, keep tap targets and caption sizes readable.
 
 ---
 

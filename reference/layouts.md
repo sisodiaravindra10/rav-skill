@@ -40,6 +40,18 @@ Names match the `hero:` enum in SKILL.md.
 
 **Variance note.** SKILL.md avoids centered heroes above `variance=4`. These three earn the exception by putting a real artifact directly under the CTA pair, carrying the variance the type gave up. Without the artifact the rule holds.
 
+### product-stage (his own rule, from a rejected page)
+
+**Shape.** The brand color fills the fold edge to edge as one field, not a tint. Headline at real scale, 5 words or fewer, up to 9rem, in the foreground color that field forces. One line of subhead, one CTA pair. The product sits on the field at 60 to 70 percent of the viewport width, cut by the fold or bleeding off an edge, large enough that its labels read without zooming.
+
+**Load-bearing.** Three things at once: the field, the scale, and a product that is real. Take any one away and it collapses into a template. A capture of the running app, or the actual component mounted and interactive. Where the product has a single entry action, fuse this with live-input and let the visitor use it right there.
+
+**Reach for it when** the page sells a software product and the product has at least one screen worth looking at. This is the default for SaaS marketing.
+
+**Kills it.** A white page with the brand color demoted to a button. Small mono captions around the product. A diagram or metaphor of the product where the product should be. An invented dashboard. A pale gradient standing in for a color decision.
+
+**Where it came from.** A SaaS homepage built around a green-bar ledger metaphor was rejected outright: pale bands, small mono, tables, no hero moment. The fix was not a better metaphor. It was color, scale and the product.
+
 ### asymmetric-split (Auxia, the automation page, Fusion)
 
 **Shape.** 45/55 or 40/60. Left column caps around 520px: eyebrow or nothing, left-aligned H1 at 2-3 lines, optional hairline, subhead, CTA pair. Right column starts above the headline's cap height and bleeds off the right edge.
@@ -130,7 +142,7 @@ Real artifacts (PDFs, spreadsheets, chat fragments, cards) overlapped at slight 
 ## Proportions that hold across all of them
 
 - **First fold:** the type block owns the top 30-40%, the artifact starts at 55-60% and is deliberately cut by the fold. Nothing important sits vertically centered.
-- **Display:** 56-88px desktop, inside SKILL.md's 6rem cap. Subhead 17-20px, 45-60ch, two lines.
+- **Display:** 56-88px desktop, inside SKILL.md's 6rem default cap. A short product-stage or centered-display headline may run to 9rem. Subhead 17-20px, 45-60ch, two lines.
 - **CTA pair:** one filled primary plus one ghost or outline secondary, 12px apart. Never two filled buttons. The secondary carries a small leading icon (play, arrow) or nothing at all.
 - **Section rhythm:** 96-160px vertical padding. Consecutive sections sharing a ground take the larger value.
 - **Ground:** four of the five shipped references use bone or cream (`#faf7f2` to `#f7f4ef`) rather than white, with near-black type. This is not the banned premium-consumer beige, which is beige *plus brass plus espresso* as a complete palette. Bone with a blue, black, or single bright accent is a different move and a good one.

@@ -75,6 +75,21 @@ Interface motion stays under 300ms outside the last two rows. These sit inside S
 
 **Focus is not animated in.** A focus ring appears at once. Animate its offset if you like, never its arrival.
 
+## Surface details that ride along
+
+Not motion, but the same scale and the same payoff. These come from Jakub Krehel's `make-interfaces-feel-better`; load it for the full list and its review format.
+
+- **Concentric radius.** A rounded thing inside a rounded thing uses inner radius = outer radius minus the padding between them. Equal radii on both look pinched.
+- **Optical over geometric.** A play icon, an arrow or a glyph with uneven weight is nudged until it looks centered, even when the numbers say it already is.
+- **Shadows lift, borders divide.** Use a shadow to say something sits above, a hairline to say two things are separate. Not both for the same job.
+- **Never `transition: all`.** Name the properties. `all` animates things you did not mean to and costs frames.
+- **Tabular numerals** on anything that updates or lines up in a column: prices, timers, counters, tables.
+- **Balanced and pretty wrapping.** `text-wrap: balance` on headings, `text-wrap: pretty` on body, so no line ends on one orphan word.
+- **Hit area larger than the glyph.** A small icon button extends its target with a pseudo-element, not by growing the icon.
+- **Images get a faint inner outline** (about 1px at 8 to 10 percent) so a pale image does not dissolve into a pale page.
+- **Icon stroke matches text weight.** A thin icon beside medium text reads as a different system.
+- **No entrance animation on first page load** for things that are simply there. Entrances are for what arrives later.
+
 ## Techniques worth reaching for
 
 **A touch of blur fixes a bad crossfade.** When swapping two states still looks like two objects overlapping, add `filter: blur(2px)` and drop opacity to about 0.7 for the 200ms of the swap. The eye reads one thing changing. Keep blur small; heavy blur is slow in Safari.
@@ -113,6 +128,7 @@ Interface motion stays under 300ms outside the last two rows. These sit inside S
 | The app feels slow or busy and motion may be why | `remove-animations` |
 | A page that should feel installed on a phone | `mobile-native` |
 | Does this component survive real content | `break-ui` |
+| A full detail review with findings by file and line | `make-interfaces-feel-better` |
 | Critique of motion that already ships | `review-animations`, or `improve-animations` for a codebase |
 | Finding what should move and does not | `find-animation-opportunities` |
 | The deeper reasoning behind this file | `emil-design-eng` |

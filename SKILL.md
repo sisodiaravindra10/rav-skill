@@ -1,7 +1,7 @@
 ---
 name: rav
 metadata:
-  version: 3.3.0
+  version: 3.4.0
 description: Ravindra's personal design skill, the taste layer for any interface he wants in his own hand rather than a generic one. Use it whenever he asks to build, design, redesign, mock up, critique or improve a website, landing page, portfolio piece, hero, brand moment, product UI, dashboard, consumer mobile screen or component, even when he does not name the skill, and for the scoped moves polish, bolder, quieter, distill, harden, onboard, animate, colorize, typeset, layout, delight, clarify, adapt, optimize, overdrive and review-motion on an existing surface. Also on /rav, "use rav taste", "in my style", "make it look like mine". For an award-level or immersive site, pair it with awwwards (it runs build and QA, rav supplies taste). Not for ZopDev-branded deliverables, which the zopdev skills own; not for films and motion graphics; not for non-visual work (refactors, docs, copy-only edits); and never when he says "without rav" or asks for your own judgment instead.
 ---
 
@@ -299,6 +299,8 @@ rav is the taste layer. When another skill owns the process or the brand, let it
 | a page that is not converting | `cro` | keeps the fixes inside the page's world |
 | labels, errors, empty states | `design:ux-copy` | the voice pass |
 | rewriting a draft that reads as machine-written | `humanizer` | his own rules on top: zero em-dashes, no section-sign glyph |
+| a detail review of a built component: radii, alignment, shadows, icons, numerals | `make-interfaces-feel-better` | decides which findings fit the world; its floor is already in [reference/micro.md](reference/micro.md) |
+| a brief that names a brand's feel ("like Linear", "Stripe-clean") | the design-md library, see [reference/world.md](reference/world.md) | takes structure from it, never the identity |
 | one narrow library choice | `pick-ui-library` | nothing |
 
 Image references in generate mode use whatever image generation tool the environment has. There is no dedicated imagegen skill installed; the process in [reference/modes.md](reference/modes.md) is self-contained.
@@ -355,7 +357,7 @@ Move verbs are scoped refinements of a surface that already shipped. Each has a 
 
 | move | group | does |
 |---|---|---|
-| `polish` | refine | final pass before shipping: triage defects, complete the whole path |
+| `polish` | refine | final pass before shipping: triage defects, complete the whole path. Loads `make-interfaces-feel-better` for the detail sweep |
 | `bolder` | refine | raise one section to the conviction the rest already implies |
 | `quieter` | refine | reduce intensity without losing the point of view. Loads `remove-animations` when the noise is motion |
 | `distill` | refine | strip to essence, remove what does not earn its place |

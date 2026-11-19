@@ -119,7 +119,7 @@ reference/intake.md           read the project first, then one round of question
 scripts/verify.mjs            the craft floor, made executable
 ```
 
-Progressive disclosure: the spine stays under 450 lines and the playbooks load only when
+Progressive disclosure: the spine stays under 500 lines and the playbooks load only when
 the work needs them.
 
 ## What it delegates

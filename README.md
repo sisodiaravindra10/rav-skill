@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="rav: a design skill that learns your taste. An interview question, an answer, and the profile file it becomes." width="100%">
+  <img src="assets/banner.png" alt="rav: a design skill that learns your taste. A pixel dusk over a hill fort, a small orange raven perched on the headline, and the install command." width="100%">
 </p>
 
 # rav <img src="assets/mascot/raven-fly-orange.svg" alt="" width="44" align="right">
@@ -11,7 +11,7 @@ Most design skills are a rulebook: the same rules for everyone, so the same page
 ## One prompt, with and without
 
 <p align="center">
-  <img src="assets/proof-kiln.png" alt="The same prompt built twice. Without the skill: a cream page with serif italics and a terracotta accent, with invented prices. With rav: a cobalt field with a rendered pot and no invented facts." width="100%">
+  <img src="assets/proof-kiln.png" alt="One prompt built twice, shown in a single compare panel with a raven on the divider. Without the skill: cream, serif italics, terracotta, three invented prices and three invented contact facts. With rav: a cobalt field, and none." width="100%">
 </p>
 
 Same prompt, same model, one run each. The plain run landed on cream, serif italics and terracotta, the look models reach for whenever the subject is a craft, and it invented three prices, a phone number, a street address and a founding year. The run with rav did neither. Both pages, the prompt and the full comparison are in [`proof/kiln`](proof/kiln).
@@ -30,6 +30,10 @@ Then, in Claude Code:
 /rav setup
 ```
 
+<p align="center">
+  <img src="assets/setup-interview.png" alt="The setup interview: two questions and two answers, and the profile file they become, with ten questions and one file as the two figures." width="100%">
+</p>
+
 That is the interview. About ten questions, one at a time, rough answers are fine. It writes your profile into `~/.claude/skills/rav/profile/`, which git ignores, so it stays on your machine and survives updates.
 
 You can skip setup and use the skill straight away. It works from the core rules and gets sharper once it knows you.
@@ -46,7 +50,7 @@ build me a landing page for a ceramics studio in Jaipur
 ```
 
 <p align="center">
-  <img src="assets/how-it-works.png" alt="What rav does on a new page: reads first, asks once, shows directions, builds the hero then stops, checks itself." width="100%">
+  <img src="assets/how-it-works.png" alt="What rav does on a new page, drawn as a night road with five lamps: reads first, asks once, shows directions, builds the hero then stops (the lit lamp), checks itself." width="100%">
 </p>
 
 On a new page it will:
@@ -59,10 +63,16 @@ On a new page it will:
 
 If you say "just build it", it skips the questions and tells you what it assumed.
 
+On a page that already exists, name a move and it stays inside it:
+
+<p align="center">
+  <img src="assets/moves.png" alt="The sixteen moves as chips in four groups (refine, enhance, fix, evaluate) beside a stage showing the polish move: one button state becoming seven." width="100%">
+</p>
+
 ## What is in it
 
 <p align="center">
-  <img src="assets/two-layers.png" alt="Two layers. Your profile sits on top of the core rules and outranks them." width="100%">
+  <img src="assets/two-layers.png" alt="Two layers, drawn as a cut through the ground: your profile is the warm layer under a lit town, the core is the bedrock below it." width="100%">
 </p>
 
 **Your profile** (`profile/`, created by setup)

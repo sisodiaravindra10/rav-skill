@@ -90,6 +90,10 @@ const RULES = [
     why: "ease-in hesitates at the moment the person is watching. Use a custom ease-out. See reference/micro.md.",
     test: (l) => /(transition|animation)[^;{]*[\s,]ease-in(?!-out)\b/.test(l) || /\bease-in\b(?!-out)["'`\s]*$/.test(l) && /class/.test(l) },
 
+  { id: "tailwind-opacity-step", severity: "warning",
+    why: "Tailwind 3 only generates colour opacity in steps of 5 (plus 0 and 100). A value like white/12 emits no class and the colour falls back to the default, usually near-white. Write white/[0.12], or use a step. Ignore this on Tailwind 4.",
+    test: (l) => { const m = l.match(/\b(?:border|bg|text|ring|divide|outline|decoration|fill|stroke|from|via|to)(?:-[a-z]+)*-(?:white|black|[a-z]+-\d{2,3}|\[#[0-9a-fA-F]{3,8}\])\/(\d{1,3})\b/g); return !!m && m.some((c) => Number(c.split("/").pop()) % 5 !== 0); } },
+
   { id: "slop-phrase", severity: "warning",
     why: "A sentence shape that marks copy as machine-made. See reference/voice.md and say the concrete thing instead.",
     test: (l) => /\b(not just (a|an|another)\b|more than just\b|whether you(['’]re| are)\b|in today['’]s\b|in the age of\b|let['’]s (dive|face it)|here['’]s the thing|the best part\?|the result\?|at its core\b|take (it|your \w+) to the next level|unlock (your|the)\b|supercharge|effortlessly|reimagin(e|ed|ing)\b|cutting[- ]edge|world[- ]class|best[- ]in[- ]class|we get it\b|simple as that|say goodbye to|look no further)/i.test(l) },

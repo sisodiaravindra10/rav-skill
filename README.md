@@ -156,6 +156,12 @@ If you run your own comparison, open an issue with the result either way.
 
 <br clear="left">
 
+## Made by
+
+Ravindra Sisodia, a product designer working from Jodhpur.
+
+[Portfolio](https://ravindra-siso.vercel.app/) · [Dribbble](https://dribbble.com/sisodiaravindra) · [Behance](https://www.behance.net/ravindrasisodia) · [LinkedIn](https://www.linkedin.com/in/ravindra-sisodia/) · [Instagram](https://www.instagram.com/ravindrasiso/)
+
 ## Contributing
 
 Issues and pull requests are welcome, especially: a tell the list misses, a rule that made your output worse, a checker false positive, or your own profile for `examples/` if you are happy to share one.

@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kiln, a ceramics studio in Jaipur</title>
+<meta name="description" content="Kiln is a ceramics studio in Jaipur. Handmade tableware sold online, and wheel-throwing classes on Saturdays and Sundays. Throw a pot on the page, then come and do it in clay.">
+<meta name="theme-color" content="#1B3A9C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231B3A9C'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23F2EEDF' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;500&family=Onest:wght@400..700&family=Unbounded:wght@500..900&display=swap" rel="stylesheet">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<style>
+/* Metric-matched fallbacks so the swap does not move the layout */
+@font-face { font-family: "Unbounded Fallback"; src: local("Arial Black"), local("Arial Bold"), local("Arial"); size-adjust: 112%; ascent-override: 92%; descent-override: 24%; }
+@font-face { font-family: "Onest Fallback"; src: local("Helvetica Neue"), local("Arial"); size-adjust: 101%; ascent-override: 94%; descent-override: 24%; }
+
+:root {
+  /* One world: Jaipur blue-pottery cobalt, then the same blue as ink on tin-glaze white */
+  --cobalt: #1B3A9C;
+  --cobalt-deep: #14297A;
+  --navy: #0F1B4D;
+  --cream: #F2EEDF;
+  --mist: #C5CEEE;
+  --marigold: #E3AE3C;
+  --marigold-press: #D49E2B;
+  --tin: #ECEFF0;
+  --tin-deep: #DFE4E8;
+  --slate: #424E7C;
+  --danger: #A8271B;
+
+  /* theme roles, switched once at .fired */
+  --ground: var(--cobalt);
+  --ground-2: var(--cobalt-deep);
+  --ink: var(--cream);
+  --ink-2: var(--mist);
+  --line: rgba(242, 238, 223, 0.18);
+  --ring: var(--cream);
+
+  --display: "Unbounded", "Unbounded Fallback", sans-serif;
+  --body: "Onest", "Onest Fallback", sans-serif;
+  --mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* radius rule: pills for buttons, chips and nav. 24px panels. 12px inputs. */
+  --r-pill: 999px;
+  --r-panel: 24px;
+  --r-input: 12px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-press: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-move: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* z scale: 1 type under the pot, 2 pot, 3 controls, 10 nav */
+  --gutter: clamp(20px, 4vw, 56px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scrollbar-color: var(--marigold) var(--cobalt-deep); scrollbar-width: thin; }
+body {
+  margin: 0; background: var(--cobalt); color: var(--ink);
+  font-family: var(--body); font-size: 1.0625rem; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  caret-color: var(--marigold); overflow-x: clip;
+}
+::selection { background: var(--marigold); color: var(--navy); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--cobalt-deep); }
+::-webkit-scrollbar-thumb { background: var(--marigold); border-radius: 999px; border: 2px solid var(--cobalt-deep); }
+h1, h2, h3, p, figure { margin: 0; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; }
+p { text-wrap: pretty; }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 4px; }
+.vh { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: var(--gutter); top: -80px; z-index: 20; background: var(--marigold); color: var(--navy); padding: 12px 18px; border-radius: var(--r-pill); font-weight: 600; text-decoration: none; }
+.skip:focus { top: 12px; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 26px; border-radius: var(--r-pill);
+  font: 600 1rem/1 var(--body); letter-spacing: 0.005em; text-decoration: none; white-space: nowrap;
+  border: 1px solid transparent; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+  transition: transform 160ms var(--ease-press), background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn--primary { background: var(--marigold); color: var(--navy); border-color: var(--navy); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn[disabled] { cursor: default; }
+.btn[disabled]:active { transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover { background: var(--cream); }
+  .btn--ghost:hover { background: var(--ink); color: var(--ground); }
+  .btn[disabled]:hover { background: transparent; color: var(--ink); }
+}
+
+/* ---------- nav: detached pill ---------- */
+.nav {
+  position: fixed; z-index: 10; top: 14px; left: 50%; transform: translateX(-50%);
+  width: min(1180px, calc(100% - 2 * var(--gutter) + 16px));
+  height: 64px; padding: 0 8px 0 24px; display: flex; align-items: center; gap: 28px;
+  background: rgba(15, 27, 77, 0.78); -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(242, 238, 223, 0.16); border-radius: var(--r-pill); color: var(--cream);
+}
+.nav__mark { font: 800 1.125rem/1 var(--display); letter-spacing: -0.02em; text-decoration: none; margin-right: auto; padding: 14px 0; }
+.nav__links { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.nav__links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: var(--r-pill); font-size: 0.9375rem; font-weight: 500; text-decoration: none; color: var(--mist); transition: color 160ms ease, background-color 160ms ease; }
+.nav .btn { min-height: 48px; padding: 0 22px; font-size: 0.9375rem; border-color: transparent; }
+.nav :focus-visible { outline-color: var(--cream); }
+@media (hover: hover) and (pointer: fine) { .nav__links a:hover { color: var(--cream); background: rgba(242, 238, 223, 0.1); } }
+@media (max-width: 760px) { .nav { gap: 8px; padding-left: 20px; } .nav__links { display: none; } }
+
+/* ---------- hero: the working wheel on a cobalt field ---------- */
+.hero { position: relative; min-height: 100vh; min-height: 100dvh; padding: 96px var(--gutter) 40px; display: flex; flex-direction: column; justify-content: center; overflow: clip; }
+.hero__copy { max-width: 1180px; width: 100%; margin: 0 auto; padding-bottom: 6vh; }
+.hero h1 {
+  position: relative; z-index: 1; font-weight: 800; font-size: clamp(2.25rem, 6.9vw, 8rem); line-height: 0.98; letter-spacing: -0.04em;
+}
+.hero h1 span { display: block; white-space: nowrap; }
+.hero__sub { position: relative; z-index: 3; max-width: 31ch; margin-top: clamp(20px, 3vh, 36px); font-size: clamp(1.0625rem, 1.35vw, 1.3125rem); line-height: 1.5; color: var(--mist); }
+.hero .cta-row { position: relative; z-index: 3; display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(24px, 3.5vh, 40px); }
+
+.stage { position: absolute; z-index: 2; inset: 0 0 0 49%; }
+.stage__glow { position: absolute; left: 50%; top: 52%; width: min(120%, 980px); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; opacity: var(--heat, 0); /* decoration only: the kiln glow during firing */
+  background: radial-gradient(closest-side, rgba(255, 196, 96, 0.85), rgba(240, 110, 40, 0.42) 38%, rgba(200, 60, 20, 0.12) 62%, rgba(200, 60, 20, 0) 74%); }
+#wheel { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: grab; outline-offset: -10px; border-radius: var(--r-panel); }
+#wheel.is-dragging { cursor: grabbing; }
+#wheel.is-locked { cursor: default; }
+.stage__fallback { position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); width: min(80%, 320px); text-align: center; color: var(--mist); font-size: 0.9375rem; display: none; }
+.no-gl .stage__fallback { display: block; }
+.no-gl #wheel { display: none; }
+
+.bench {
+  position: absolute; z-index: 3; left: 50%; bottom: 28px; transform: translateX(-50%);
+  width: min(600px, calc(100% - 32px)); padding: 10px 10px 10px 22px;
+  display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 18px; row-gap: 4px;
+  background: var(--cobalt-deep); border: 1px solid var(--line); border-radius: 36px; color: var(--cream);
+  box-shadow: 0 18px 40px -18px rgba(8, 16, 56, 0.7);
+}
+.bench__status { grid-column: 1; font-size: 0.9375rem; line-height: 1.35; color: var(--cream); min-height: 2.7em; display: flex; align-items: center; }
+.glazes { grid-column: 1; border: 0; margin: 0; padding: 0; display: flex; align-items: center; gap: 4px; min-width: 0; }
+.glazes legend { float: left; padding: 0; margin-right: 10px; font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--mist); }
+.swatch { position: relative; width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.swatch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.swatch i { width: 26px; height: 26px; border-radius: 50%; background: var(--c); border: 1px solid rgba(242, 238, 223, 0.5); box-shadow: inset -4px -5px 8px rgba(8, 16, 56, 0.28), inset 3px 3px 5px rgba(255, 255, 255, 0.35); transition: transform 160ms var(--ease-press), box-shadow 180ms ease; }
+.swatch input:checked + i { box-shadow: inset -4px -5px 8px rgba(8, 16, 56, 0.28), inset 3px 3px 5px rgba(255, 255, 255, 0.35), 0 0 0 3px var(--bench-bg, var(--cobalt-deep)), 0 0 0 5px var(--marigold); }
+.swatch input:focus-visible + i { outline: 2px solid var(--ring); outline-offset: 6px; }
+.swatch:active i { transform: scale(0.92); }
+.bench__fire { grid-column: 2; grid-row: 1 / span 2; position: relative; overflow: hidden; min-width: 148px; min-height: 60px; background: var(--cream); color: var(--navy); border-color: var(--cream); isolation: isolate; }
+.bench__fire::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--marigold); transform: scaleX(0); transform-origin: left center; }
+.bench__fire.is-firing::before { transform: scaleX(1); transition: transform var(--fire-ms, 3200ms) linear; }
+.bench__fire[disabled] { color: var(--navy); }
+@media (hover: hover) and (pointer: fine) {
+  .swatch:hover i { transform: scale(1.08); }
+  .bench__fire:not([disabled]):hover { background: var(--marigold); border-color: var(--marigold); }
+  .bench__fire[disabled]:hover { background: var(--cream); color: var(--navy); }
+}
+
+@media (max-width: 900px) {
+  .hero { padding-top: 104px; padding-bottom: 20px; justify-content: flex-start; }
+  .hero__copy { padding-bottom: 0; }
+  .hero h1 { font-size: clamp(2.125rem, 10.4vw, 5rem); }
+  .hero__sub { max-width: 34ch; }
+  .stage { position: relative; inset: auto; margin: 8px calc(-1 * var(--gutter)) 0; height: clamp(340px, 50dvh, 520px); flex: 0 0 auto; }
+  .bench { bottom: 0; }
+}
+@media (max-width: 420px) {
+  .hero .cta-row { gap: 8px; }
+  .hero .cta-row .btn { padding: 0 17px; font-size: 0.9375rem; }
+  .bench { padding-left: 16px; column-gap: 8px; }
+  .bench__fire { min-width: 112px; padding: 0 16px; }
+  .glazes legend { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, .swatch i { transition: background-color 180ms ease, color 180ms ease, opacity 180ms ease; }
+  .btn:active { transform: none; opacity: 0.82; }
+  .swatch:active i, .swatch:hover i { transform: none; }
+  .bench__fire.is-firing::before { transition: opacity 400ms ease; transform: scaleX(1); }
+}
+
+/* ---------- sections below the hero ---------- */
+.wrap { max-width: 1180px; margin: 0 auto; }
+.section { padding: clamp(96px, 13vw, 168px) var(--gutter); background: var(--ground); color: var(--ink); }
+.section h2 { font-weight: 700; font-size: clamp(1.75rem, 3.2vw, 3.125rem); line-height: 1.06; letter-spacing: -0.035em; }
+.lede { max-width: 56ch; margin-top: 20px; font-size: clamp(1.0625rem, 1.3vw, 1.25rem); line-height: 1.55; color: var(--ink-2); }
+
+/* two-tone statement */
+.statement { padding-top: clamp(72px, 10vw, 136px); }
+.statement p { font-family: var(--display); font-weight: 800; font-size: clamp(1.75rem, 6.6vw, 7rem); line-height: 1; letter-spacing: -0.04em; text-wrap: nowrap; }
+.statement span { display: block; }
+.statement .quiet { color: #8FA2E6; }
+
+/* the class: four verbs on hairlines */
+.classes { padding-top: 0; }
+.quad { --qp: clamp(16px, 2.2vw, 36px); list-style: none; margin: clamp(40px, 6vw, 80px) calc(-1 * var(--qp)) 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+.quad li { padding: 0 var(--qp) 8px; border-left: 1px solid var(--line); }
+.quad li:first-child { border-left: 0; }
+.quad canvas { display: block; width: min(100%, 210px); height: auto; margin-left: -14px; }
+.quad h3 { margin-top: 18px; font-weight: 700; font-size: clamp(1.25rem, 1.9vw, 1.75rem); letter-spacing: -0.03em; line-height: 1.1; }
+.quad p { margin-top: 10px; font-size: 1rem; line-height: 1.55; color: var(--ink-2); max-width: 30ch; }
+.classes .cta-row { margin-top: clamp(40px, 5vw, 64px); display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.classes .cta-row p { color: var(--ink-2); font-size: 1rem; max-width: 44ch; }
+@media (max-width: 860px) {
+  .quad { grid-template-columns: 1fr 1fr; row-gap: 48px; }
+  .quad li:nth-child(odd) { border-left: 0; }
+}
+
+/* ---------- the one theme switch: out of the kiln, cobalt becomes the ink ---------- */
+.fired {
+  --ground: var(--tin); --ground-2: var(--tin-deep); --ink: var(--navy); --ink-2: var(--slate);
+  --line: rgba(15, 27, 77, 0.16); --ring: var(--navy);
+  background: var(--ground); color: var(--ink);
+}
+.fired ::selection { background: var(--cobalt); color: var(--cream); }
+
+/* tableware shelf */
+.ware__head { display: flex; flex-direction: column; }
+.chips { border: 0; padding: 0; margin: 36px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 18px 0 12px; border-radius: var(--r-pill); border: 1px solid #6A7499; font-size: 0.9375rem; font-weight: 500; color: var(--navy); cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; transition: transform 160ms var(--ease-press), background-color 180ms ease, color 180ms ease, border-color 180ms ease; }
+.chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.chip i { width: 20px; height: 20px; border-radius: 50%; background: var(--c); border: 1px solid rgba(15, 27, 77, 0.35); box-shadow: inset -3px -4px 6px rgba(8, 16, 56, 0.25), inset 2px 2px 4px rgba(255, 255, 255, 0.4); }
+.chip:has(input:checked) { background: var(--navy); border-color: var(--navy); color: var(--cream); }
+.chip:has(input:checked) i { border-color: rgba(242, 238, 223, 0.7); }
+.chip:has(input:focus-visible) { outline: 2px solid var(--ring); outline-offset: 3px; }
+.chip:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .chip:not(:has(input:checked)):hover { background: var(--tin-deep); } }
+
+.shelf { --shelf-h: clamp(150px, 13.6vw, 262px); --cap-h: 46px; margin: 8px calc(50% - 50vw) 0; padding: 0 var(--gutter) 6px;
+  background: linear-gradient(var(--navy), var(--navy)) left 0 bottom calc(var(--cap-h) + 6px) / 100% 1px no-repeat; background-attachment: scroll; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-color: var(--cobalt) var(--tin-deep); }
+.shelf::-webkit-scrollbar-track { background: var(--tin-deep); }
+.shelf::-webkit-scrollbar-thumb { background: var(--cobalt); border-color: var(--tin-deep); }
+.shelf:focus-visible { outline-offset: -4px; }
+.shelf ul { list-style: none; margin: 0 auto; padding: 0; display: flex; align-items: flex-end; gap: clamp(14px, 1.8vw, 26px); width: max-content; }
+.shelf li { scroll-snap-align: start; scroll-margin-left: var(--gutter); }
+.shelf figure { display: flex; flex-direction: column; }
+.shelf canvas { display: block; height: var(--shelf-h); width: auto; transition: filter 200ms ease, opacity 200ms ease; }
+.shelf.is-swapping canvas { filter: blur(2px); opacity: 0.7; }
+.shelf figcaption { height: var(--cap-h); padding-top: 16px; text-align: center; font-family: var(--display); font-weight: 600; font-size: clamp(0.8125rem, 1vw, 1rem); letter-spacing: -0.02em; white-space: nowrap; }
+.ware { padding-bottom: clamp(56px, 7vw, 96px); }
+.ware__foot { margin-top: clamp(24px, 3vw, 40px); display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+.ware__foot p { max-width: 46ch; color: var(--ink-2); font-size: 1rem; }
+.fired .btn--ghost { border-color: var(--navy); }
+
+/* booking: the close */
+.book { padding-top: 0; }
+.book .wrap { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; padding-top: clamp(56px, 7vw, 96px); border-top: 1px solid var(--line); }
+.book h2 { font-size: clamp(2.25rem, 5.2vw, 5rem); font-weight: 800; }
+.book h2 span { display: block; white-space: nowrap; }
+.book h2 #day-word { display: inline-block; color: var(--cobalt); transition: opacity 180ms ease, filter 180ms ease; }
+.book h2 #day-word.is-swapping { opacity: 0.4; filter: blur(3px); }
+.book__mail { margin-top: 28px; font-size: 1rem; color: var(--ink-2); }
+.book__mail a { color: var(--navy); font-weight: 600; display: inline-block; padding: 10px 0; }
+.form { background: #F8FAFA; border: 1px solid var(--line); border-radius: var(--r-panel); padding: clamp(20px, 3vw, 36px); display: grid; gap: 22px; box-shadow: 0 24px 48px -32px rgba(15, 27, 77, 0.35); }
+.field { display: grid; gap: 8px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.field > label, .field > legend { font-size: 0.9375rem; font-weight: 600; padding: 0; }
+.field .opt { font-weight: 400; color: var(--slate); }
+.field input[type="text"], .field input[type="email"], .field textarea {
+  width: 100%; min-height: 52px; padding: 13px 16px; border-radius: var(--r-input); border: 1px solid #6A7499; background: #FFFFFE; color: var(--navy);
+  font: 400 1rem/1.4 var(--body); transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.field textarea { min-height: 92px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: #5B668F; }
+.field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; border-radius: var(--r-input); }
+.field [aria-invalid="true"] { border-color: var(--danger); box-shadow: inset 0 0 0 1px var(--danger); }
+.field .err { min-height: 0; font-size: 0.875rem; color: var(--danger); }
+.field .err:empty { display: none; }
+.row2 { display: grid; grid-template-columns: 1fr auto; gap: 22px; align-items: start; }
+.seg { display: inline-grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border: 1px solid #6A7499; border-radius: var(--r-pill); background: #FFFFFE; }
+.seg label { position: relative; display: grid; place-items: center; min-height: 44px; padding: 0 20px; border-radius: var(--r-pill); font-weight: 600; font-size: 0.9375rem; cursor: pointer; transition: background-color 180ms ease, color 180ms ease, transform 160ms var(--ease-press); -webkit-tap-highlight-color: transparent; }
+.seg input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.seg label:has(input:checked) { background: var(--navy); color: var(--cream); }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--navy); outline-offset: 2px; }
+.seg label:active { transform: scale(0.97); }
+.stepper { justify-self: start; display: inline-grid; grid-template-columns: 44px 44px 44px; align-items: center; padding: 4px; border: 1px solid #6A7499; border-radius: var(--r-pill); background: #FFFFFE; }
+.stepper button { width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--navy); cursor: pointer; transition: transform 160ms var(--ease-press), background-color 160ms ease; -webkit-tap-highlight-color: transparent; }
+.stepper button:active { transform: scale(0.92); }
+.stepper button[disabled] { color: #9AA2BD; cursor: default; }
+.stepper button[disabled]:active { transform: none; }
+.stepper output { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stepper svg { width: 18px; height: 18px; }
+@media (hover: hover) and (pointer: fine) { .stepper button:not([disabled]):hover { background: var(--tin-deep); } .seg label:not(:has(input:checked)):hover { background: var(--tin); } }
+.form__send { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.form__send .btn { min-width: 180px; }
+.form__send .btn[disabled] { background: var(--tin-deep); color: var(--slate); border-color: #6A7499; }
+.form__note { font-size: 0.875rem; color: var(--slate); max-width: 34ch; }
+.form__done { font-size: 0.9375rem; line-height: 1.5; padding: 14px 16px; border-radius: var(--r-input); background: var(--tin); border: 1px solid var(--line); }
+.form__done:empty { display: none; }
+.form__done a { font-weight: 600; }
+@media (max-width: 860px) { .book .wrap { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .row2 { grid-template-columns: 1fr; } }
+
+/* footer */
+.foot { padding: clamp(16px, 3vw, 40px) var(--gutter) 40px; background: var(--ground); color: var(--ink); overflow: clip; }
+.foot__mark { font-family: var(--display); font-weight: 900; font-size: clamp(5rem, 27vw, 24rem); line-height: 0.8; letter-spacing: 0; color: var(--cobalt); margin-left: -0.04em; }
+.foot__row { margin-top: clamp(32px, 5vw, 64px); padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 40px; font-size: 0.9375rem; color: var(--ink-2); }
+.foot__row ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 24px; }
+.foot__row a { display: inline-flex; align-items: center; min-height: 44px; color: var(--navy); font-weight: 500; }
+.foot__row p { display: flex; align-items: center; min-height: 44px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chip, .seg label, .stepper button { transition: background-color 180ms ease, color 180ms ease; }
+  .chip:active, .seg label:active, .stepper button:active { transform: none; opacity: 0.8; }
+  .shelf.is-swapping canvas, .book h2 #day-word.is-swapping { filter: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#book">Skip to booking</a>
+
+<header class="nav">
+  <a class="nav__mark" href="#top" aria-label="Kiln, back to top">Kiln</a>
+  <nav aria-label="Sections">
+    <ul class="nav__links">
+      <li><a href="#classes">Classes</a></li>
+      <li><a href="#tableware">Tableware</a></li>
+    </ul>
+  </nav>
+  <a class="btn btn--primary" href="#book">Book a class</a>
+</header>
+
+<main>
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero__copy">
+      <h1 id="hero-title"><span>Throw a pot</span> <span>right here.</span></h1>
+      <p class="hero__sub">Kiln is a ceramics studio in Jaipur. We make tableware by hand and teach the wheel on Saturdays and Sundays.</p>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="#book">Book a class</a>
+        <a class="btn btn--ghost" href="#tableware">See the tableware</a>
+      </div>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="stage__glow" id="glow" aria-hidden="true"></div>
+      <canvas id="wheel" tabindex="0" role="application" aria-label="A pot of wet clay turning on a wheel" aria-describedby="wheel-keys"></canvas>
+      <p class="vh" id="wheel-keys">Drag the wall of the pot to shape it. With a keyboard: up and down arrows choose a height, left and right arrows squeeze or widen the pot there, and shift with up or down makes it taller or shorter.</p>
+      <p class="stage__fallback">The wheel needs WebGL and it did not start in this browser. The studio one works every weekend.</p>
+      <div class="bench" id="bench">
+        <p class="bench__status" id="status" role="status" aria-live="polite">Wet clay. Drag the wall to shape it.</p>
+        <fieldset class="glazes" id="hero-glazes">
+          <legend>Glaze</legend>
+          <label class="swatch" style="--c:#E9E6DA"><input type="radio" name="glaze" value="milk" checked><i></i><span class="vh">Milk white</span></label>
+          <label class="swatch" style="--c:#2C9E98"><input type="radio" name="glaze" value="turquoise"><i></i><span class="vh">Turquoise</span></label>
+          <label class="swatch" style="--c:#D9A12E"><input type="radio" name="glaze" value="mustard"><i></i><span class="vh">Mustard</span></label>
+          <label class="swatch" style="--c:#5E3B25"><input type="radio" name="glaze" value="iron"><i></i><span class="vh">Iron brown</span></label>
+        </fieldset>
+        <button class="btn bench__fire" id="fire" type="button">Fire it</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section statement" aria-label="What to expect">
+    <div class="wrap">
+      <p><span class="quiet">Your first bowl</span> <span class="quiet">will wobble.</span> <span>Everyone’s does.</span></p>
+    </div>
+    <!-- TODO photo: a first-timer's hands on a spinning lump of clay, shot at the studio, 1600x1000. Sits full width under the statement once it exists. -->
+  </section>
+
+  <section class="section classes" id="classes" aria-labelledby="classes-title">
+    <div class="wrap">
+      <h2 id="classes-title">The weekend class</h2>
+      <p class="lede">Wheel-throwing for first-timers, on Saturdays and Sundays. You spend it at a wheel with your hands in clay, doing these four things in this order.</p>
+      <ol class="quad">
+        <li>
+          <canvas data-stage="wedge" width="320" height="274" role="img" aria-label="A rough ball of wet clay"></canvas>
+          <h3>Wedge</h3>
+          <p>Knead the clay until it is even all the way through. A lump you miss now turns up later as a lopsided wall.</p>
+        </li>
+        <li>
+          <canvas data-stage="centre" width="320" height="274" role="img" aria-label="The clay pressed into a low dome in the middle of the wheel"></canvas>
+          <h3>Centre</h3>
+          <p>Lean in and hold steady until the spinning lump stops pushing back. This is the hard part, and nobody gets it first go.</p>
+        </li>
+        <li>
+          <canvas data-stage="open" width="320" height="274" role="img" aria-label="The clay opened into a thick low ring"></canvas>
+          <h3>Open</h3>
+          <p>Press a thumb into the middle and stop about a finger above the wheel. That finger of clay is the floor of your bowl.</p>
+        </li>
+        <li>
+          <canvas data-stage="pull" width="320" height="274" role="img" aria-label="The wall pulled up into a tall cylinder"></canvas>
+          <h3>Pull</h3>
+          <p>Squeeze the wall between your fingertips and bring it up slowly. Three pulls in, it starts to look like a cup.</p>
+        </li>
+      </ol>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="#book">Book a class</a>
+        <p>You do not need to bring anything or know anything. Wear clothes that can take a splash of slip.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="fired">
+    <section class="section ware" id="tableware" aria-labelledby="ware-title">
+      <div class="wrap">
+        <div class="ware__head">
+          <h2 id="ware-title">Made on the same wheels</h2>
+          <p class="lede">Plates, bowls and cups, thrown by hand in the studio and sold online. Pick a glaze and the whole shelf changes.</p>
+          <fieldset class="chips" id="shelf-glazes">
+            <legend class="vh">Glaze for the shelf</legend>
+            <label class="chip" style="--c:#1A3A9A"><input type="radio" name="shelf-glaze" value="cobalt" checked><i></i>Cobalt</label>
+            <label class="chip" style="--c:#2C9E98"><input type="radio" name="shelf-glaze" value="turquoise"><i></i>Turquoise</label>
+            <label class="chip" style="--c:#D9A12E"><input type="radio" name="shelf-glaze" value="mustard"><i></i>Mustard</label>
+            <label class="chip" style="--c:#5E3B25"><input type="radio" name="shelf-glaze" value="iron"><i></i>Iron brown</label>
+            <label class="chip" style="--c:#E9E6DA"><input type="radio" name="shelf-glaze" value="milk"><i></i>Milk white</label>
+          </fieldset>
+        </div>
+        <div class="shelf" id="shelf" tabindex="0" role="region" aria-label="The tableware shelf, scrolls sideways">
+          <!-- TODO photos: one cut-out product photograph per piece on a plain ground, about 1200px on the long side. Each replaces the drawn shape in its figure. -->
+          <ul>
+            <li><figure><canvas data-ware="plate" role="img" aria-label="A wide dinner plate with a low rim"></canvas><figcaption>Dinner plate</figcaption></figure></li>
+            <li><figure><canvas data-ware="bowl" role="img" aria-label="A wide shallow pasta bowl"></canvas><figcaption>Pasta bowl</figcaption></figure></li>
+            <li><figure><canvas data-ware="katori" role="img" aria-label="A small round katori"></canvas><figcaption>Katori</figcaption></figure></li>
+            <li><figure><canvas data-ware="cup" role="img" aria-label="A small chai cup without a handle"></canvas><figcaption>Chai cup</figcaption></figure></li>
+            <li><figure><canvas data-ware="tumbler" role="img" aria-label="A straight tumbler"></canvas><figcaption>Tumbler</figcaption></figure></li>
+            <li><figure><canvas data-ware="carafe" role="img" aria-label="A tall carafe with a round belly and a narrow neck"></canvas><figcaption>Carafe</figcaption></figure></li>
+          </ul>
+        </div>
+        <div class="ware__foot">
+          <a class="btn btn--ghost" href="mailto:hello@kiln.example?subject=Tableware%20from%20Kiln">Order by email</a>
+          <p>These are sample shapes drawn by the wheel on this page, not photographs. Write to us for what is on the shelf now.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section book" id="book" aria-labelledby="book-title">
+      <div class="wrap">
+        <div>
+          <h2 id="book-title"><span>Come on</span> <span><span id="day-word">Saturday</span>.</span></h2>
+          <p class="lede">Tell us the day and how many of you. We write back with the times, the fee and directions to the studio in Jaipur.</p>
+          <p class="book__mail">Rather just write? <a href="mailto:hello@kiln.example">hello@kiln.example</a></p>
+          <!-- TODO photo: the wheel room in morning light, shot at the studio, 1200x1500. Sits under this column once it exists. -->
+        </div>
+        <form class="form" id="book-form" action="mailto:hello@kiln.example" method="post" enctype="text/plain" novalidate>
+          <div class="row2">
+            <fieldset class="field">
+              <legend>Which day</legend>
+              <div class="seg">
+                <label><input type="radio" name="day" value="Saturday" checked>Saturday</label>
+                <label><input type="radio" name="day" value="Sunday">Sunday</label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label id="people-label" for="people-out">How many of you</label>
+              <div class="stepper" role="group" aria-labelledby="people-label">
+                <button type="button" id="fewer" aria-label="One fewer person" disabled><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 9h10"/></svg></button>
+                <output id="people-out" aria-live="polite">1</output>
+                <button type="button" id="more" aria-label="One more person"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 9h10M9 4v10"/></svg></button>
+              </div>
+              <input type="hidden" name="people" id="people" value="1">
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input type="text" id="f-name" name="name" autocomplete="name" required aria-describedby="e-name">
+            <p class="err" id="e-name" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" required aria-describedby="e-email">
+            <p class="err" id="e-email" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="f-note">Anything we should know <span class="opt">(optional)</span></label>
+            <textarea id="f-note" name="note" rows="3"></textarea>
+          </div>
+          <div class="form__send">
+            <button class="btn btn--primary" type="submit" id="send">Send request</button>
+            <p class="form__note">This opens your mail app with the request written out. Nothing is sent until you press send there.</p>
+          </div>
+          <p class="form__done" id="done" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="wrap">
+        <p class="foot__mark" aria-hidden="true">Kiln</p>
+        <div class="foot__row">
+          <p>Kiln, a ceramics studio in Jaipur, Rajasthan.</p>
+          <ul>
+            <li><a href="#classes">Classes</a></li>
+            <li><a href="#tableware">Tableware</a></li>
+            <li><a href="#book">Book a class</a></li>
+            <li><a href="mailto:hello@kiln.example">hello@kiln.example</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+</main>
+
+<script type="module">
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const smooth = (t) => { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); };
+const K = 36;
+
+const GLAZES = {
+  milk:      { name: 'Milk white', color: '#E9E6DA' },
+  turquoise: { name: 'Turquoise',  color: '#2C9E98' },
+  mustard:   { name: 'Mustard',    color: '#D9A12E' },
+  iron:      { name: 'Iron brown', color: '#5E3B25' },
+  cobalt:    { name: 'Cobalt',     color: '#1A3A9A' },
+};
+const WET = { color: '#8F7B66', roughness: 0.46, clearcoat: 0.85, clearcoatRoughness: 0.16, bump: 0.85 };
+const FIRED = { roughness: 0.3, clearcoat: 0.6, clearcoatRoughness: 0.12, bump: 0.3 };
+
+function profile(h, fn, o = {}) {
+  const r = new Float32Array(K + 1);
+  for (let k = 0; k <= K; k++) r[k] = fn(k / K);
+  return { h, r, wall: o.wall ?? 0.07, solid: !!o.solid };
+}
+const starter = () => profile(1.12, (t) => 0.5 + 0.045 * Math.sin(t * 3.1) - 0.05 * t);
+
+let THREE, RoomEnvironment;
+try {
+  THREE = await import('three');
+  ({ RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js'));
+  const probe = document.createElement('canvas');
+  if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) throw new Error('no webgl');
+} catch (err) {
+  document.documentElement.classList.add('no-gl');
+  THREE = null;
+}
+
+if (THREE) {
+  const V2 = (x, y) => new THREE.Vector2(x, y);
+
+  function lathePoints(p) {
+    const c = Math.min(0.03, p.h * 0.1);
+    const yAt = (k) => c + (p.h - c) * k / K;
+    const pts = [V2(0, 0), V2(Math.max(0.02, p.r[0] - c), 0)];
+    const ridge = p.solid ? 0.0015 : 0.003;                      // finger ridges, thrown not turned
+    for (let k = 0; k <= K; k++) pts.push(V2(Math.max(0.001, p.r[k] + (p.r[k] > 0.05 ? ridge * (Math.sin(k * 2.3) + 0.6 * Math.sin(k * 5.3 + 1)) : 0)), yAt(k)));
+    if (p.solid) { pts.push(V2(0, p.h)); return pts; }
+    const w = p.wall;
+    pts.push(V2(Math.max(0.02, p.r[K] - w * 0.5), p.h + w * 0.32));
+    const floor = Math.min(0.1, p.h * 0.45);
+    let last = K;
+    for (let k = K; k >= 0; k--) { if (yAt(k) <= floor) break; pts.push(V2(Math.max(0.02, p.r[k] - w), yAt(k))); last = k; }
+    pts.push(V2(Math.max(0.02, p.r[Math.max(0, last - 1)] - w), floor));
+    pts.push(V2(0, floor));
+    return pts;
+  }
+  const latheGeo = (p, seg = 80) => new THREE.LatheGeometry(lathePoints(p), seg);
+
+  function ringTexture() {
+    const c = document.createElement('canvas'); c.width = 256; c.height = 512;
+    const g = c.getContext('2d');
+    g.fillStyle = '#808080'; g.fillRect(0, 0, 256, 512);
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let y = 0; y < 512; y++) {
+      const v = 128 + 34 * Math.sin(y * 0.42) + 20 * Math.sin(y * 0.11 + 1.3) + (rnd() - 0.5) * 34;
+      g.fillStyle = `rgb(${v | 0},${v | 0},${v | 0})`; g.fillRect(0, y, 256, 1);
+    }
+    for (let i = 0; i < 46; i++) {
+      g.fillStyle = `rgba(${rnd() > 0.5 ? 255 : 0},${rnd() > 0.5 ? 255 : 0},${rnd() > 0.5 ? 255 : 0},0.05)`;
+      g.fillRect(rnd() * 256, rnd() * 512, 2 + rnd() * 26, 30 + rnd() * 160);
+    }
+    const t = new THREE.CanvasTexture(c); t.wrapS = THREE.RepeatWrapping; t.wrapT = THREE.ClampToEdgeWrapping; t.repeat.set(2, 1);
+    return t;
+  }
+  function blobTexture() {
+    const c = document.createElement('canvas'); c.width = c.height = 128;
+    const g = c.getContext('2d'); const gr = g.createRadialGradient(64, 64, 6, 64, 64, 64);
+    gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.55, 'rgba(255,255,255,0.45)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+    return new THREE.CanvasTexture(c);
+  }
+  const rings = ringTexture();
+  const blob = blobTexture();
+
+  function clayMaterial(look) {
+    return new THREE.MeshPhysicalMaterial({
+      color: look.color, roughness: look.roughness, metalness: 0,
+      clearcoat: look.clearcoat, clearcoatRoughness: look.clearcoatRoughness,
+      bumpMap: rings, bumpScale: look.bump, envMapIntensity: 0.9,
+      emissive: '#000000', emissiveIntensity: 0,
+    });
+  }
+
+  function makeKit(canvas, fill) {
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+    const scene = new THREE.Scene();
+    const pm = new THREE.PMREMGenerator(renderer);
+    scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture;
+    const key = new THREE.DirectionalLight('#FFE3BD', 2.7); key.position.set(-3.2, 4.6, 3.4); scene.add(key);
+    const bounce = new THREE.DirectionalLight(fill, 1.5); bounce.position.set(4, 1.2, 1.5); scene.add(bounce);
+    return { renderer, scene, bounce };
+  }
+
+  /* ================= the hero wheel ================= */
+  const canvas = document.getElementById('wheel');
+  const stage = document.getElementById('stage');
+  const glow = document.getElementById('glow');
+  const statusEl = document.getElementById('status');
+  const fireBtn = document.getElementById('fire');
+  const FIRE_MS = 3200;
+  fireBtn.style.setProperty('--fire-ms', FIRE_MS + 'ms');
+
+  const { renderer, scene } = makeKit(canvas, '#5E7BE8');
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
+
+  const spin = new THREE.Group(); scene.add(spin);
+  const head = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.04, 1.04, 0.07, 96),
+    new THREE.MeshStandardMaterial({ color: '#9AA3BB', metalness: 0.85, roughness: 0.34 })
+  ); head.position.y = -0.035; spin.add(head);
+  const drum = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.86, 0.78, 0.2, 96),
+    new THREE.MeshStandardMaterial({ color: '#0F1B4D', metalness: 0.4, roughness: 0.55 })
+  ); drum.position.y = -0.17; scene.add(drum);
+  const floorShadow = new THREE.Mesh(
+    new THREE.CircleGeometry(1.3, 48),
+    new THREE.MeshBasicMaterial({ map: blob, color: '#081038', transparent: true, opacity: 0.45, depthWrite: false })
+  ); floorShadow.rotation.x = -Math.PI / 2; floorShadow.position.y = -0.3; scene.add(floorShadow);
+  const slip = new THREE.Mesh(
+    new THREE.CircleGeometry(0.82, 64),
+    new THREE.MeshPhysicalMaterial({ color: '#7C6A57', roughness: 0.3, clearcoat: 0.8, clearcoatRoughness: 0.2, transparent: true, opacity: 0.92 })
+  ); slip.rotation.x = -Math.PI / 2; slip.position.y = 0.002; spin.add(slip);
+  const shadow = new THREE.Mesh(
+    new THREE.CircleGeometry(1, 48),
+    new THREE.MeshBasicMaterial({ map: blob, color: '#081038', transparent: true, opacity: 0.5, depthWrite: false })
+  ); shadow.rotation.x = -Math.PI / 2; shadow.position.y = 0.004; spin.add(shadow);
+
+  let pot = starter();
+  const mat = clayMaterial(WET);
+  const mesh = new THREE.Mesh(latheGeo(pot), mat);
+  spin.add(mesh);
+
+  const marker = new THREE.Mesh(new THREE.TorusGeometry(1, 0.012, 8, 96), new THREE.MeshBasicMaterial({ color: '#F2EEDF' }));
+  marker.rotation.x = Math.PI / 2; marker.visible = false; spin.add(marker);
+
+  let state = 'wet';            // wet | firing | fired
+  let glaze = 'milk';
+  let omega = reduce.matches ? 0 : 5.2;
+  let wobble = 0.012, wobbleKick = 0;
+  let fireStart = 0, shrink = 1;
+  let cursorK = Math.round(K * 0.6);
+  let visible = true, needsFrame = true;
+
+  const cWet = new THREE.Color(WET.color), cGlaze = new THREE.Color(GLAZES[glaze].color), cTmp = new THREE.Color();
+  const heatStops = ['#2A0300', '#B32D08', '#FF8A22', '#FFE2A6'].map((h) => new THREE.Color(h));
+
+  function rebuild() {
+    mesh.geometry.dispose(); mesh.geometry = latheGeo(pot);
+    const rMax = Math.max(...pot.r);
+    shadow.scale.setScalar(rMax * 1.55);
+    slip.scale.setScalar(Math.max(0.7, pot.r[0] * 1.55) / 0.82);
+    marker.position.y = pot.h * cursorK / K; marker.scale.set(pot.r[cursorK] + 0.03, pot.r[cursorK] + 0.03, 1);
+    needsFrame = true;
+  }
+  function relax() {
+    const r = pot.r;
+    for (let pass = 0; pass < 2; pass++) for (let k = 1; k < K; k++) r[k] += (0.5 * (r[k - 1] + r[k + 1]) - r[k]) * 0.14;
+    for (let k = 0; k <= K; k++) r[k] = clamp(r[k], 0.13, 1.02);
+    r[0] = clamp(r[0], 0.24, 0.8); r[1] = Math.max(r[1], 0.22);
+  }
+  function press(kf, target, sigma, gain) {
+    for (let k = 0; k <= K; k++) { const w = Math.exp(-((k - kf) ** 2) / (2 * sigma * sigma)); pot.r[k] += (target - pot.r[k]) * w * gain; }
+    relax(); rebuild();
+  }
+
+  function fit() {
+    const w = stage.clientWidth, h = stage.clientHeight; if (!w || !h) return;
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); renderer.setSize(w, h, false);
+    const aspect = w / h; camera.aspect = aspect;
+    const narrow = w < 560;
+    const yMin = narrow ? -0.7 : -0.62, yMax = narrow ? 1.86 : 2.02, need = 2.5;
+    const half = Math.max((yMax - yMin) / 2, need / 2 / aspect);
+    const d = half / Math.tan(THREE.MathUtils.degToRad(15));
+    const cy = (yMin + yMax) / 2, tilt = THREE.MathUtils.degToRad(13);
+    camera.position.set(0, cy + d * Math.sin(tilt), d * Math.cos(tilt)); camera.lookAt(0, cy, 0);
+    camera.updateProjectionMatrix(); renderer.render(scene, camera); needsFrame = true;
+  }
+  new ResizeObserver(fit).observe(stage); fit();
+
+  /* pointer shaping */
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0), hit = new THREE.Vector3();
+  function toWorld(e) {
+    const b = canvas.getBoundingClientRect();
+    ndc.set(((e.clientX - b.left) / b.width) * 2 - 1, -(((e.clientY - b.top) / b.height) * 2 - 1));
+    ray.setFromCamera(ndc, camera);
+    return ray.ray.intersectPlane(plane, hit) ? hit : null;
+  }
+  const radiusAt = (y) => pot.r[clamp(Math.round((y / pot.h) * K), 0, K)];
+  function nearWall(p) { return p && p.y > -0.1 && p.y < pot.h + 0.28 && Math.abs(Math.abs(p.x) - radiusAt(clamp(p.y, 0, pot.h))) < 0.42; }
+  let drag = null;
+  canvas.addEventListener('pointerdown', (e) => {
+    if (state !== 'wet') return;
+    const p = toWorld(e); if (!nearWall(p)) return;
+    const rim = e.pointerType !== 'touch' && p.y > pot.h * 0.9;
+    drag = { id: e.pointerId, rim, lastX: p.x, lastY: p.y, off: Math.abs(p.x) - radiusAt(clamp(p.y, 0, pot.h)) };
+    canvas.setPointerCapture(e.pointerId); canvas.classList.add('is-dragging');
+  });
+  canvas.addEventListener('pointermove', (e) => {
+    const p = toWorld(e);
+    if (!drag) { if (state === 'wet') canvas.style.cursor = nearWall(p) ? 'grab' : 'default'; return; }
+    if (e.pointerId !== drag.id || !p) return;
+    drag.off *= 0.86;
+    const target = clamp(Math.abs(p.x) - drag.off, 0.13, 1.02);
+    if (drag.rim) {
+      pot.h = clamp(p.y, 0.3, 1.72);
+      press(K, target, 4, 0.5);
+    } else {
+      press(clamp(p.y / pot.h, 0, 1) * K, target, 4.2, 0.42);
+    }
+    const speed = Math.hypot(p.x - drag.lastX, p.y - drag.lastY);
+    wobbleKick = Math.min(0.05, wobbleKick + speed * 0.12);
+    drag.lastX = p.x; drag.lastY = p.y;
+  });
+  const endDrag = () => { if (!drag) return; drag = null; canvas.classList.remove('is-dragging'); canvas.style.cursor = ''; };
+  canvas.addEventListener('pointerup', endDrag); canvas.addEventListener('pointercancel', endDrag); canvas.addEventListener('lostpointercapture', endDrag);
+
+  /* keyboard shaping: no animation, the hand has already moved on */
+  canvas.addEventListener('keydown', (e) => {
+    if (state !== 'wet' || !e.key.startsWith('Arrow')) return;
+    e.preventDefault();
+    if (e.shiftKey && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) { pot.h = clamp(pot.h + (e.key === 'ArrowUp' ? 0.06 : -0.06), 0.3, 1.72); rebuild(); return; }
+    if (e.key === 'ArrowUp') cursorK = clamp(cursorK + 3, 0, K);
+    else if (e.key === 'ArrowDown') cursorK = clamp(cursorK - 3, 0, K);
+    else press(cursorK, clamp(pot.r[cursorK] + (e.key === 'ArrowRight' ? 0.07 : -0.07), 0.13, 1.02), 4.2, 1);
+    rebuild();
+  });
+  canvas.addEventListener('focus', () => { marker.visible = state === 'wet' && canvas.matches(':focus-visible'); needsFrame = true; });
+  canvas.addEventListener('blur', () => { marker.visible = false; needsFrame = true; });
+
+  /* glaze + firing */
+  document.getElementById('hero-glazes').addEventListener('change', (e) => {
+    glaze = e.target.value; cGlaze.set(GLAZES[glaze].color);
+    if (state === 'fired') { reglaze.from.copy(mat.color); reglaze.t0 = performance.now(); statusEl.textContent = `Reglazed in ${GLAZES[glaze].name.toLowerCase()}.`; }
+    needsFrame = true;
+  });
+  const reglaze = { from: new THREE.Color(), t0: 0 };
+
+  function setLook(g, heat) {
+    mat.color.copy(cTmp.copy(cWet).lerp(cGlaze, g));
+    mat.roughness = WET.roughness + (FIRED.roughness - WET.roughness) * g;
+    mat.clearcoat = WET.clearcoat + (FIRED.clearcoat - WET.clearcoat) * g;
+    mat.clearcoatRoughness = WET.clearcoatRoughness + (FIRED.clearcoatRoughness - WET.clearcoatRoughness) * g;
+    mat.bumpScale = WET.bump + (FIRED.bump - WET.bump) * g;
+    const s = clamp(heat, 0, 1) * (heatStops.length - 1), i = Math.min(heatStops.length - 2, Math.floor(s));
+    mat.emissive.copy(heatStops[i]).lerp(heatStops[i + 1], s - i); mat.emissiveIntensity = heat * 1.5;
+    glow.style.setProperty('--heat', (heat * 0.9).toFixed(3));
+    slip.material.opacity = 0.92 - 0.6 * g; slip.material.roughness = 0.3 + 0.6 * g;
+  }
+
+  fireBtn.addEventListener('click', () => {
+    if (state === 'wet') {
+      state = 'firing'; fireStart = performance.now(); endDrag(); marker.visible = false;
+      canvas.classList.add('is-locked'); fireBtn.disabled = true; fireBtn.classList.add('is-firing'); fireBtn.textContent = 'Firing';
+      statusEl.textContent = 'In the kiln. The wheel stops, the heat climbs.';
+      canvas.setAttribute('aria-label', 'The pot firing in the kiln');
+    } else if (state === 'fired') {
+      state = 'wet'; pot = starter(); shrink = 1; drop.t0 = performance.now(); omega = reduce.matches ? 0 : 5.2; wobbleKick = 0.03;
+      setLook(0, 0); rebuild(); canvas.classList.remove('is-locked'); fireBtn.textContent = 'Fire it';
+      statusEl.textContent = 'Fresh clay. Drag the wall to shape it.';
+      canvas.setAttribute('aria-label', 'A pot of wet clay turning on a wheel');
+    }
+  });
+  const drop = { t0: -1e9 };
+
+  function finishFiring() {
+    state = 'fired'; shrink = 0.9; setLook(1, 0); omega = reduce.matches ? 0 : 0.4;
+    fireBtn.disabled = false; fireBtn.classList.remove('is-firing'); fireBtn.textContent = 'Throw another';
+    statusEl.textContent = 'Fired. It came out smaller: clay shrinks by about a tenth in the kiln.';
+    canvas.setAttribute('aria-label', `Your pot, fired and glazed in ${GLAZES[glaze].name.toLowerCase()}`);
+  }
+
+  let last = performance.now();
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (!visible) { last = now; return; }
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    let jitter = 0;
+
+    if (state === 'firing') {
+      const f = (now - fireStart) / FIRE_MS;
+      if (reduce.matches) {
+        const g = smooth((now - fireStart) / 400); setLook(g, 0); shrink = 1 - 0.1 * g;
+        if (f >= 0.4) finishFiring();
+      } else {
+        omega = 5.2 * (1 - smooth(f / 0.14));                                  // anticipation: the wheel runs down first
+        const heat = smooth((f - 0.1) / 0.36) * (1 - smooth((f - 0.58) / 0.34)); // climb, hold, cool
+        setLook(smooth((f - 0.5) / 0.4), heat);
+        shrink = 1 - 0.1 * smooth((f - 0.16) / 0.58) - 0.012 * Math.sin(Math.PI * clamp((f - 0.82) / 0.18, 0, 1));
+        jitter = heat * 0.004 * Math.sin(now * 0.09) * Math.sin(now * 0.031);  // heat shimmer, irregular
+        if (f >= 1) finishFiring();
+      }
+      needsFrame = true;
+    }
+    if (state === 'fired' && now - reglaze.t0 < 320) { mat.color.copy(reglaze.from).lerp(cGlaze, smooth((now - reglaze.t0) / 300)); needsFrame = true; }
+    else if (state === 'fired' && reglaze.t0) { mat.color.copy(cGlaze); reglaze.t0 = 0; needsFrame = true; }
+
+    const fresh = reduce.matches ? 1 : smooth((now - drop.t0) / 260);
+    wobbleKick *= Math.exp(-dt * 2.2);
+    spin.rotation.y += omega * dt;
+    mesh.position.x = state === 'fired' ? 0 : wobble + wobbleKick;
+    mesh.rotation.z = jitter;
+    mesh.scale.setScalar(shrink * (0.95 + 0.05 * fresh));
+    if (omega > 0.01 || wobbleKick > 0.0005 || fresh < 1) needsFrame = true;
+    if (needsFrame) { renderer.render(scene, camera); needsFrame = false; }
+  }
+  new IntersectionObserver(([en]) => { visible = en.isIntersecting && !document.hidden; }, { threshold: 0.02 }).observe(stage);
+  document.addEventListener('visibilitychange', () => { visible = !document.hidden; });
+  reduce.addEventListener('change', () => { omega = reduce.matches ? 0 : (state === 'fired' ? 0.4 : state === 'wet' ? 5.2 : omega); needsFrame = true; });
+  rebuild(); setLook(0, 0);
+  requestAnimationFrame(frame);
+
+  /* ================= stills: class stages and the shelf ================= */
+  const off = document.createElement('canvas');
+  const kit2 = makeKit(off, '#5E7BE8');
+  const ortho = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 40);
+  const stillMat = clayMaterial(WET);
+  const stillMesh = new THREE.Mesh(new THREE.BufferGeometry(), stillMat); kit2.scene.add(stillMesh);
+  const stillShadow = new THREE.Mesh(new THREE.CircleGeometry(1, 48), new THREE.MeshBasicMaterial({ map: blob, transparent: true, depthWrite: false }));
+  stillShadow.rotation.x = -Math.PI / 2; stillShadow.position.y = 0.002; kit2.scene.add(stillShadow);
+
+  function still(target, p, look, frame, ground) {
+    const ppu = frame.ppu, W = Math.round(frame.w * ppu), H = Math.round((frame.y1 - frame.y0) * ppu);
+    kit2.renderer.setPixelRatio(1); kit2.renderer.setSize(W, H, false);
+    kit2.bounce.color.set(ground === 'tin' ? '#DDE4F4' : '#5E7BE8');
+    stillMesh.geometry.dispose(); stillMesh.geometry = latheGeo(p, 96);
+    stillMat.color.set(look.color); stillMat.roughness = look.roughness; stillMat.clearcoat = look.clearcoat;
+    stillMat.clearcoatRoughness = look.clearcoatRoughness; stillMat.bumpScale = look.bump;
+    stillShadow.scale.setScalar(Math.max(...p.r) * 1.14);
+    stillShadow.material.color.set(ground === 'tin' ? '#0F1B4D' : '#081038'); stillShadow.material.opacity = ground === 'tin' ? 0.42 : 0.55;
+    const hw = frame.w / 2, hh = (frame.y1 - frame.y0) / 2, cy = (frame.y0 + frame.y1) / 2, tilt = THREE.MathUtils.degToRad(15);
+    ortho.left = -hw; ortho.right = hw; ortho.top = hh; ortho.bottom = -hh;
+    ortho.position.set(0, cy + 12 * Math.sin(tilt), 12 * Math.cos(tilt)); ortho.lookAt(0, cy, 0); ortho.updateProjectionMatrix();
+    kit2.renderer.render(kit2.scene, ortho);
+    target.width = W; target.height = H;
+    target.getContext('2d').drawImage(off, 0, 0, W, H);
+  }
+
+  const STAGES = {
+    wedge:  profile(0.6,  (t) => 0.34 * Math.sqrt(Math.max(0, 1 - (2 * (0.14 + 0.86 * t) - 1) ** 2)), { solid: true }),
+    centre: profile(0.38, (t) => 0.52 * Math.sqrt(Math.max(0, 1 - Math.pow(t, 3.4))), { solid: true }),
+    open:   profile(0.4,  (t) => 0.52 + 0.015 * t, { wall: 0.2 }),
+    pull:   profile(1.04, (t) => 0.4 + 0.02 * Math.sin(t * 3) + 0.025 * t),
+  };
+  const stageFrame = { w: 1.6, y0: -0.16, y1: 1.21, ppu: 300 };
+  document.querySelectorAll('canvas[data-stage]').forEach((c) => still(c, STAGES[c.dataset.stage], WET, stageFrame, 'cobalt'));
+
+  const WARE = {
+    plate:   { w: 3.0, p: profile(0.13, (t) => 0.8 + 0.5 * Math.pow(t, 0.75), { wall: 0.05 }) },
+    bowl:    { w: 2.12, p: profile(0.34, (t) => 0.4 + 0.5 * Math.pow(t, 0.55), { wall: 0.055 }) },
+    katori:  { w: 1.4,  p: profile(0.3,  (t) => 0.26 + 0.3 * Math.pow(t, 0.5), { wall: 0.05 }) },
+    cup:     { w: 1.08, p: profile(0.46, (t) => 0.25 + 0.14 * Math.pow(t, 0.8), { wall: 0.05 }) },
+    tumbler: { w: 0.98, p: profile(0.8,  (t) => 0.27 + 0.07 * t, { wall: 0.05 }) },
+    carafe:  { w: 1.3, p: profile(1.28, (t) => { if (t < 0.62) return 0.3 + 0.2 * Math.sin(Math.PI * t / 0.62); const u = (t - 0.62) / 0.38; return 0.3 - 0.11 * smooth(u * 1.5) + 0.08 * smooth((u - 0.55) / 0.45); }, { wall: 0.05 }) },
+  };
+  const shelf = document.getElementById('shelf');
+  function drawShelf(key) {
+    const look = { ...FIRED, color: GLAZES[key].color };
+    shelf.querySelectorAll('canvas[data-ware]').forEach((c) => { const w = WARE[c.dataset.ware]; still(c, w.p, look, { w: w.w, y0: -0.16, y1: 1.48, ppu: 300 }, 'tin'); });
+  }
+  drawShelf('cobalt');
+  let swapTimer = 0;
+  document.getElementById('shelf-glazes').addEventListener('change', (e) => {
+    clearTimeout(swapTimer);
+    if (reduce.matches) { drawShelf(e.target.value); return; }
+    shelf.classList.add('is-swapping');
+    swapTimer = setTimeout(() => { drawShelf(e.target.value); shelf.classList.remove('is-swapping'); }, 200);
+  });
+}
+
+/* ================= booking form: works without WebGL ================= */
+{
+  const MAIL = 'hello@kiln.example';
+  const form = document.getElementById('book-form'), done = document.getElementById('done'), send = document.getElementById('send');
+  const dayWord = document.getElementById('day-word');
+  const people = document.getElementById('people'), out = document.getElementById('people-out'), fewer = document.getElementById('fewer'), more = document.getElementById('more');
+  const MAX = 6;
+  const setPeople = (n) => { n = clamp(n, 1, MAX); people.value = n; out.textContent = n; fewer.disabled = n <= 1; more.disabled = n >= MAX; };
+  fewer.addEventListener('click', () => setPeople(+people.value - 1));
+  more.addEventListener('click', () => setPeople(+people.value + 1));
+  form.addEventListener('change', (e) => {
+    if (e.target.name !== 'day') return;
+    if (reduce.matches) { dayWord.textContent = e.target.value; return; }
+    dayWord.classList.add('is-swapping');
+    setTimeout(() => { dayWord.textContent = e.target.value; dayWord.classList.remove('is-swapping'); }, 180);
+  });
+  const rules = {
+    'f-name':  (v) => v.trim() ? '' : 'Add your name so we know who is coming.',
+    'f-email': (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'That email looks incomplete. Check it has an @ and a domain, then send again.',
+  };
+  const check = (id) => { const el = document.getElementById(id), msg = rules[id](el.value); el.setAttribute('aria-invalid', msg ? 'true' : 'false'); document.getElementById(el.getAttribute('aria-describedby')).textContent = msg; return !msg; };
+  Object.keys(rules).forEach((id) => document.getElementById(id).addEventListener('blur', () => { if (document.getElementById(id).value) check(id); }));
+  Object.keys(rules).forEach((id) => document.getElementById(id).addEventListener('input', () => { if (document.getElementById(id).getAttribute('aria-invalid') === 'true') check(id); }));
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const bad = Object.keys(rules).filter((id) => !check(id));
+    if (bad.length) { document.getElementById(bad[0]).focus(); return; }
+    const d = new FormData(form), n = +d.get('people');
+    const body = [`Day: ${d.get('day')}`, `People: ${n}`, `Name: ${d.get('name').trim()}`, `Email: ${d.get('email').trim()}`, d.get('note').trim() ? `Note: ${d.get('note').trim()}` : ''].filter(Boolean).join('\n');
+    const href = `mailto:${MAIL}?subject=${encodeURIComponent(`Class request: ${d.get('day')}, ${n} ${n === 1 ? 'person' : 'people'}`)}&body=${encodeURIComponent(body)}`;
+    send.disabled = true; send.textContent = 'Opening mail';
+    window.location.href = href;
+    setTimeout(() => {
+      send.disabled = false; send.textContent = 'Send request';
+      done.innerHTML = `Your mail app should now be open with the request for ${d.get('day')} written out. Press send there and we will reply. If nothing opened, write to <a href="mailto:${MAIL}">${MAIL}</a>.`;
+    }, 900);
+  });
+}
+</script>
+</body>
+</html>

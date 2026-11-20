@@ -16,7 +16,7 @@ Two picks from the same archetype means the layout-family repetition ban failed 
 
 ## The sources, ranked
 
-Craft is not evenly distributed. Reading these as equally good is how a template signature ends up in his work.
+Craft is not evenly distributed. Reading these as equally good is how a template signature ends up in their work.
 
 **Shipped, study whole.** Dub (dub.co), Auxia, Slite (slite.com), The Software House (tsh.io), Valley. Real customers, real content, every decision paid for.
 
@@ -40,7 +40,7 @@ Names match the `hero:` enum in SKILL.md.
 
 **Variance note.** SKILL.md avoids centered heroes above `variance=4`. These three earn the exception by putting a real artifact directly under the CTA pair, carrying the variance the type gave up. Without the artifact the rule holds.
 
-### product-stage (his own rule, from a rejected page)
+### product-stage (from a rejected page)
 
 **Shape.** The brand color fills the fold edge to edge as one field, not a tint. Headline at real scale, 5 words or fewer, up to 9rem, in the foreground color that field forces. One line of subhead, one CTA pair. The product sits on the field at 60 to 70 percent of the viewport width, cut by the fold or bleeding off an edge, large enough that its labels read without zooming.
 

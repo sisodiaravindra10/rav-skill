@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kiln, Jaipur. Handmade tableware and weekend wheel classes</title>
+<meta name="description" content="Kiln is a small ceramics studio in Jaipur's old city. Handmade stoneware tableware, shipped across India, and weekend wheel-throwing classes for beginners.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#F3EADB; --bone-2:#EADDC8; --ink:#2A1B14; --ink-soft:#6B564A;
+  --clay:#B4552D; --clay-deep:#8E3D1D; --cobalt:#1F3FA0; --cobalt-deep:#152C75;
+  --marigold:#E9A23B; --pink:#E7B3A0; --celadon:#9CC0AA; --milk:#F0E6D4;
+  --serif:"Fraunces",Georgia,serif; --sans:"Instrument Sans",system-ui,sans-serif;
+  --pad:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bone);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--marigold);outline-offset:3px}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.22;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1;letter-spacing:-.02em;font-variation-settings:"SOFT" 60,"WONK" 1}
+h2{font-size:clamp(40px,6.4vw,92px)}
+em{font-style:italic;font-weight:300}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.wrap{padding-inline:var(--pad);max-width:1440px;margin-inline:auto}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;transition:transform .2s ease,background .2s ease,color .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-fire{background:var(--clay);color:var(--bone)}
+.btn-fire:hover{background:var(--clay-deep)}
+.btn-line{box-shadow:inset 0 0 0 1.5px currentColor}
+.btn-line:hover{background:var(--ink);color:var(--bone)}
+.btn-gold{background:var(--marigold);color:var(--ink)}
+
+/* nav */
+header.nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bone) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid rgba(42,27,20,.12)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:68px}
+.logo{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:-.03em;text-decoration:none;display:flex;align-items:baseline;gap:10px;font-variation-settings:"SOFT" 100,"WONK" 1}
+.logo small{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--ink-soft)}
+.nav nav{display:flex;gap:28px;align-items:center;font-size:15px;font-weight:500}
+.nav nav a{text-decoration:none}
+.nav nav a.l:hover{color:var(--clay)}
+.basket{padding:9px 16px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--ink);font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.basket.has{background:var(--ink);color:var(--bone)}
+@media(max-width:760px){.nav nav a.l{display:none}.logo small{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(24px,4vw,64px);align-items:end;padding-top:clamp(28px,5vw,64px);padding-bottom:clamp(40px,6vw,88px)}
+.hero h1{font-size:clamp(54px,9.6vw,156px);letter-spacing:-.035em;line-height:.9;margin:22px 0 28px}
+.hero h1 em{color:var(--clay)}
+.hero .eyebrow{display:flex;gap:12px;align-items:center;color:var(--clay-deep)}
+.hero .eyebrow i{width:9px;height:9px;border-radius:50%;background:var(--clay);animation:ember 2.4s ease-in-out infinite}
+@keyframes ember{50%{background:var(--marigold);box-shadow:0 0 0 6px rgba(233,162,59,.25)}}
+.hero p.lede{font-size:clamp(18px,1.5vw,21px);max-width:34em;color:var(--ink-soft)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.next{margin-top:36px;padding-top:20px;border-top:1px solid rgba(42,27,20,.18);display:flex;flex-wrap:wrap;gap:8px 36px;font-size:15px}
+.next b{font-family:var(--serif);font-size:22px;font-weight:500;display:block}
+.next span{color:var(--ink-soft)}
+
+.arch{position:relative;background:linear-gradient(180deg,var(--cobalt) 0%,var(--cobalt-deep) 100%);border-radius:999px 999px 18px 18px;padding:clamp(40px,7vw,88px) 12px 0;color:var(--bone);overflow:hidden}
+.arch::before{content:"";position:absolute;inset:14px 14px auto;height:100%;border:1.5px solid rgba(243,234,219,.28);border-radius:999px 999px 0 0;pointer-events:none}
+.arch .sun{position:absolute;left:50%;top:13%;width:46%;aspect-ratio:1;translate:-50% 0;border-radius:50%;background:radial-gradient(circle,rgba(233,162,59,.55),rgba(233,162,59,0) 68%)}
+#wheel{position:relative;width:100%;height:auto;touch-action:pan-y;cursor:grab;user-select:none}
+#wheel:active{cursor:grabbing}
+.spin{stroke-dasharray:34 12;animation:spin 1.1s linear infinite}
+@keyframes spin{to{stroke-dashoffset:-46}}
+.wheel-ui{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 18px;font-size:14px}
+.wheel-ui .hint{opacity:.85}
+.glazes{display:flex;gap:8px;align-items:center}
+.glazes button{width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(243,234,219,.5);transition:transform .15s}
+.glazes button[aria-pressed=true]{box-shadow:0 0 0 2px var(--cobalt-deep),0 0 0 4px var(--bone)}
+.glazes button:hover{transform:scale(1.12)}
+.glazes .reset{width:auto;height:auto;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;margin-left:6px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.arch{max-width:520px;margin-inline:auto;width:100%}}
+
+/* ticker */
+.ticker{background:var(--ink);color:var(--bone);overflow:hidden;padding:16px 0;font-family:var(--serif);font-size:clamp(20px,2.4vw,30px);font-style:italic;font-weight:300}
+.ticker div{display:flex;gap:48px;width:max-content;animation:tick 38s linear infinite;white-space:nowrap}
+.ticker span::after{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--marigold);margin-left:48px;vertical-align:middle}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* classes */
+.classes{background:var(--clay);color:var(--bone);padding-block:clamp(64px,9vw,140px);position:relative}
+.classes .eyebrow{color:#F6D7A8}
+.classes h2{margin:18px 0 0;max-width:11em}
+.classes h2 em{color:#F6D7A8}
+.c-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,88px);margin-top:clamp(36px,5vw,72px);align-items:start}
+.c-copy p{font-size:clamp(18px,1.45vw,21px);max-width:30em}
+.c-list{list-style:none;margin-top:36px;border-top:1px solid rgba(243,234,219,.35)}
+.c-list li{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(243,234,219,.35)}
+.c-list b{font-family:var(--serif);font-size:30px;font-weight:400;font-style:italic;width:1.6em;color:#F6D7A8;line-height:1}
+.c-list strong{display:block;font-weight:600}
+.c-list span{opacity:.88;font-size:16px}
+.book{background:var(--bone);color:var(--ink);border-radius:22px;padding:clamp(22px,2.6vw,36px);box-shadow:0 30px 60px -30px rgba(40,10,0,.6);position:sticky;top:92px}
+.book h3{font-size:32px;margin-bottom:4px}
+.book .sub{color:var(--ink-soft);font-size:15px;margin-bottom:20px}
+.days{display:grid;gap:8px}
+.day{display:grid;grid-template-columns:92px 1fr 1fr;gap:8px;align-items:stretch}
+.day .d{display:flex;flex-direction:column;justify-content:center;font-size:13px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--ink-soft)}
+.day .d b{font-family:var(--serif);font-size:22px;letter-spacing:-.01em;text-transform:none;color:var(--ink);font-weight:500}
+.slot{text-align:left;padding:11px 14px;border-radius:12px;background:var(--bone-2);font-size:15px;font-weight:600;transition:background .15s,color .15s,transform .15s;line-height:1.3}
+.slot small{display:block;font-weight:500;font-size:13px;color:var(--ink-soft)}
+.slot:hover:not(:disabled){background:#DFCDB1}
+.slot[aria-pressed=true]{background:var(--cobalt);color:var(--bone)}
+.slot[aria-pressed=true] small{color:rgba(243,234,219,.8)}
+.slot:disabled{opacity:.45;cursor:not-allowed;text-decoration:line-through}
+.slot .low{color:var(--clay)}
+.slot[aria-pressed=true] .low{color:#F6D7A8}
+.sum{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:22px 0 16px;padding-top:20px;border-top:1px solid rgba(42,27,20,.15)}
+.step{display:flex;align-items:center;gap:6px;font-weight:600}
+.step button{width:38px;height:38px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--ink);font-size:20px;line-height:1}
+.step button:disabled{opacity:.3;cursor:not-allowed}
+.step output{min-width:5.2em;text-align:center}
+.total{font-family:var(--serif);font-size:34px;font-weight:500;font-variant-numeric:tabular-nums}
+.book .btn{width:100%;justify-content:center}
+.book .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+.fine{font-size:13px;color:var(--ink-soft);margin-top:12px;text-align:center}
+@media(max-width:900px){.c-grid{grid-template-columns:1fr}.book{position:static}}
+@media(max-width:440px){.day{grid-template-columns:1fr 1fr}.day .d{grid-column:1/-1;flex-direction:row;gap:8px;align-items:baseline;justify-content:flex-start;margin-top:8px}}
+
+/* shop */
+.shop{padding-block:clamp(64px,9vw,140px)}
+.shop-head{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap;margin-bottom:clamp(32px,4vw,60px)}
+.shop-head h2 em{color:var(--cobalt)}
+.shop-head p{max-width:26em;color:var(--ink-soft)}
+.shop-head .eyebrow{color:var(--cobalt);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,24px)}
+.card{background:var(--bone-2);border-radius:20px;padding:18px 18px 20px;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.card:hover{transform:translateY(-6px)}
+.card:nth-child(2),.card:nth-child(5){margin-top:clamp(0px,3vw,44px)}
+.card .pic{border-radius:14px;aspect-ratio:5/4;display:grid;place-items:center;overflow:hidden}
+.card .pic svg{width:100%;height:100%;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.card:hover .pic svg{transform:scale(1.06) rotate(-2deg)}
+.card h3{font-size:27px;margin:18px 0 4px;letter-spacing:-.015em}
+.card p{font-size:15px;color:var(--ink-soft);flex:1}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.card .price{font-weight:600;font-size:18px;font-variant-numeric:tabular-nums}
+.card .add{padding:10px 18px;border-radius:999px;background:var(--ink);color:var(--bone);font-size:14px;font-weight:600;transition:background .2s}
+.card .add:hover{background:var(--cobalt)}
+.ship{margin-top:clamp(28px,4vw,56px);display:flex;flex-wrap:wrap;gap:10px 40px;font-size:15px;color:var(--ink-soft)}
+.ship b{color:var(--ink)}
+@media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.card:nth-child(n){margin-top:0}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+/* process */
+.process{background:var(--ink);color:var(--bone);padding-block:clamp(64px,9vw,140px)}
+.process .eyebrow{color:var(--marigold)}
+.process h2{margin:18px 0 clamp(36px,5vw,72px);max-width:12em}
+.process h2 em{color:var(--marigold)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(243,234,219,.25)}
+.steps li{list-style:none;padding:28px 24px 8px 0;border-right:1px solid rgba(243,234,219,.25);padding-left:24px}
+.steps li:first-child{padding-left:0}
+.steps li:last-child{border-right:0}
+.steps .n{font-family:var(--serif);font-size:clamp(44px,5vw,76px);font-weight:300;line-height:1;color:var(--marigold);font-variant-numeric:tabular-nums}
+.steps .n sup{font-size:.4em;vertical-align:top;margin-left:2px}
+.steps h3{font-size:26px;margin:18px 0 8px}
+.steps p{font-size:16px;opacity:.8}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}.steps li{padding-left:0;border-right:0;padding-right:20px;border-bottom:1px solid rgba(243,234,219,.25);padding-bottom:28px}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.quote{margin-top:clamp(48px,7vw,110px);font-family:var(--serif);font-size:clamp(26px,3.6vw,52px);line-height:1.15;font-weight:300;max-width:22em;letter-spacing:-.015em}
+.quote footer{font-family:var(--sans);font-size:15px;margin-top:22px;opacity:.75;letter-spacing:0}
+
+/* visit */
+.visit{background:var(--cobalt);color:var(--bone);padding-block:clamp(64px,9vw,140px)}
+.v-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,88px);align-items:center}
+.visit .eyebrow{color:var(--marigold)}
+.visit h2{margin:18px 0 28px}
+.visit h2 em{color:var(--pink)}
+.addr{font-family:var(--serif);font-size:clamp(22px,2.2vw,30px);line-height:1.25;font-style:normal;font-weight:300}
+.hours{margin:32px 0;border-top:1px solid rgba(243,234,219,.3)}
+.hours div{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid rgba(243,234,219,.3);font-size:16px}
+.hours dt{font-weight:600}
+.way{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:34px;font-size:15px}
+.way b{display:block;font-family:var(--serif);font-size:30px;font-weight:400;color:var(--marigold)}
+.map{background:var(--bone);border-radius:22px;overflow:hidden;color:var(--ink);rotate:1.2deg;box-shadow:0 30px 60px -30px rgba(0,0,30,.7)}
+.map text{font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;fill:#6B564A;font-weight:600}
+.pin{animation:bob 2.2s ease-in-out infinite;transform-origin:center}
+@keyframes bob{50%{transform:translateY(-6px)}}
+@media(max-width:900px){.v-grid{grid-template-columns:1fr}}
+
+/* footer */
+footer.foot{padding:clamp(48px,6vw,88px) 0 28px}
+.foot-big{font-family:var(--serif);font-weight:600;font-size:clamp(120px,30vw,460px);line-height:.74;letter-spacing:-.05em;color:var(--clay);font-variation-settings:"SOFT" 100,"WONK" 1;margin-left:-.04em;user-select:none}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px;margin-bottom:clamp(36px,5vw,72px)}
+.foot-row p{max-width:22em;color:var(--ink-soft)}
+.foot-row ul{list-style:none;display:grid;gap:6px;font-weight:500}
+.foot-row a{text-decoration:none;border-bottom:1px solid rgba(42,27,20,.3)}
+.foot-row a:hover{color:var(--clay);border-color:var(--clay)}
+.foot-end{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:var(--ink-soft);margin-top:36px;padding-top:18px;border-top:1px solid rgba(42,27,20,.15)}
+
+.toast{position:fixed;left:50%;bottom:24px;translate:-50% 140%;background:var(--ink);color:var(--bone);padding:13px 22px;border-radius:999px;font-size:15px;font-weight:500;z-index:60;transition:translate .35s cubic-bezier(.2,.8,.2,1);white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+.toast.on{translate:-50% 0}
+
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;scroll-behavior:auto!important}
+  .js .rv{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="sp" width="23" height="19" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="4" r=".9" fill="#2A1B14" opacity=".35"/><circle cx="14" cy="11" r=".6" fill="#2A1B14" opacity=".3"/>
+      <circle cx="19" cy="3" r=".5" fill="#fff" opacity=".5"/><circle cx="8" cy="16" r=".7" fill="#2A1B14" opacity=".25"/>
+    </pattern>
+    <linearGradient id="round" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".38"/><stop offset=".3" stop-color="#000" stop-opacity="0"/>
+      <stop offset=".6" stop-color="#fff" stop-opacity=".24"/><stop offset=".78" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".32"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top">Kiln <small>Jaipur</small></a>
+    <nav aria-label="Main">
+      <a class="l" href="#classes">Classes</a>
+      <a class="l" href="#shop">Tableware</a>
+      <a class="l" href="#process">How we make</a>
+      <a class="l" href="#visit">Visit</a>
+      <a class="basket" id="basket" href="#shop" aria-live="polite">Basket 0</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="wrap hero">
+  <div>
+    <p class="eyebrow"><i></i>Kiln is warm. Studio open Wed to Sun</p>
+    <h1>Come throw a pot in the <em>old city.</em></h1>
+    <p class="lede">Kiln is a small ceramics studio in a lane off Kishanpole Bazaar. We make stoneware for everyday dal and Sunday guests. On weekends we clear six wheels for anyone who wants to learn.</p>
+    <div class="cta">
+      <a class="btn btn-fire" href="#classes">Book a weekend class</a>
+      <a class="btn btn-line" href="#shop">Shop the tableware</a>
+    </div>
+    <div class="next">
+      <div><b id="nextDay">This Saturday</b><span>next class, 10 am</span></div>
+      <div><b>₹2,800</b><span>three hours, clay and firing included</span></div>
+      <div><b>6 wheels</b><span>so nobody waits for a turn</span></div>
+    </div>
+  </div>
+
+  <div class="arch">
+    <div class="sun" aria-hidden="true"></div>
+    <svg id="wheel" viewBox="0 0 400 440" role="img" aria-label="A pot spinning on a wheel. Drag sideways on the clay to reshape it.">
+      <ellipse cx="200" cy="412" rx="178" ry="20" fill="#0E1E55"/>
+      <ellipse cx="200" cy="398" rx="172" ry="26" fill="#3A2A22"/>
+      <ellipse cx="200" cy="392" rx="172" ry="26" fill="#5A4338"/>
+      <ellipse class="spin" cx="200" cy="392" rx="150" ry="22" fill="none" stroke="#3A2A22" stroke-width="1.5"/>
+      <ellipse class="spin" cx="200" cy="392" rx="118" ry="17" fill="none" stroke="#3A2A22" stroke-width="1.5"/>
+      <ellipse id="pFoot" cx="200" cy="392" fill="#000" opacity=".35"/>
+      <path id="pBody"/>
+      <path id="pSpk" fill="url(#sp)"/>
+      <path id="pShade" fill="url(#round)"/>
+      <g id="pLines" fill="none" stroke="#2A1B14" stroke-opacity=".16" stroke-width="1.2"></g>
+      <ellipse id="pRim" stroke-width="5"/>
+    </svg>
+    <div class="wheel-ui">
+      <span class="hint">Drag the clay in or out.</span>
+      <div class="glazes" role="group" aria-label="Glaze">
+        <button style="background:#C0673C" data-g="#C0673C" data-i="#7A3A1C" aria-pressed="true" aria-label="Raw clay"></button>
+        <button style="background:#F0E6D4" data-g="#F0E6D4" data-i="#B9A98E" aria-pressed="false" aria-label="Milk glaze"></button>
+        <button style="background:#E9A23B" data-g="#E9A23B" data-i="#A8691A" aria-pressed="false" aria-label="Marigold glaze"></button>
+        <button style="background:#9CC0AA" data-g="#9CC0AA" data-i="#5E8570" aria-pressed="false" aria-label="Celadon glaze"></button>
+        <button class="reset" id="reset">Start over</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div id="tick"></div></div>
+
+<section class="classes" id="classes">
+  <div class="wrap">
+    <p class="eyebrow rv">Weekend wheel classes</p>
+    <h2 class="rv">Three hours, one wheel, <em>two pots to keep.</em></h2>
+    <div class="c-grid">
+      <div class="c-copy rv">
+        <p>No experience needed, and nobody is watching. You get your own wheel, a kilo and a half of clay, and a teacher for every three people. Most first-timers centre the clay by the second try and pull a proper bowl before chai.</p>
+        <ul class="c-list">
+          <li><b>1</b><div><strong>Wedge and centre</strong><span>Learn to knead the air out and sit the clay dead centre. This is the hard part, and we stay with you through it.</span></div></li>
+          <li><b>2</b><div><strong>Open and pull</strong><span>Thumb in, walls up. You will throw four or five pieces and choose the two you like best.</span></div></li>
+          <li><b>3</b><div><strong>Chai on the terrace</strong><span>Kulhad chai and kachori from the bazaar while your pots stiffen in the sun.</span></div></li>
+          <li><b>4</b><div><strong>Pick a glaze, leave the rest to us</strong><span>We trim, glaze and fire your two pieces. Collect them in three weeks or we ship them anywhere in India.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="book rv" id="book">
+        <h3>Pick a session</h3>
+        <p class="sub">Saturdays and Sundays. Six seats each.</p>
+        <div class="days" id="days"></div>
+        <div class="sum">
+          <div class="step">
+            <button id="minus" aria-label="One fewer person">&minus;</button>
+            <output id="ppl">1 person</output>
+            <button id="plus" aria-label="One more person">+</button>
+          </div>
+          <div class="total" id="total">₹2,800</div>
+        </div>
+        <a class="btn btn-fire" id="hold" href="#" aria-disabled="true">Choose a session above</a>
+        <p class="fine">Opens an email to the studio. We confirm within a day and you pay on arrival.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="shop-head">
+      <div class="rv">
+        <p class="eyebrow">Tableware, made here</p>
+        <h2>Plates that like <em>being used.</em></h2>
+      </div>
+      <p class="rv">Stoneware thrown on the same wheels you will sit at. Fired to 1,220°C, so it goes in the dishwasher and the microwave without complaint. Every piece is a little different. That is the point.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="ship rv">
+      <span><b>Ships across India</b> in 3 to 5 days, packed in rice husk</span>
+      <span><b>Free shipping</b> over ₹4,000</span>
+      <span><b>Breakage?</b> Send a photo, we replace it</span>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <p class="eyebrow rv">How a plate gets made</p>
+    <h2 class="rv">Nineteen days from <em>mud to table.</em></h2>
+    <ol class="steps">
+      <li class="rv"><div class="n">01</div><h3>Throw</h3><p>A ball of stoneware clay, a wheel, wet hands. A dinner plate takes about six minutes once you have made a few thousand.</p></li>
+      <li class="rv"><div class="n">02</div><h3>Trim and dry</h3><p>Next morning we turn the foot and stamp the base. Then it sits on the shelf for a week. Jaipur air does the work.</p></li>
+      <li class="rv"><div class="n">900<sup>°C</sup></div><h3>First fire</h3><p>The bisque firing turns clay into ceramic. It comes out pale, chalky and thirsty for glaze.</p></li>
+      <li class="rv"><div class="n">1,220<sup>°C</sup></div><h3>Glaze fire</h3><p>Dipped by hand, fired for fourteen hours, cooled for a day and a half. We open the kiln on Thursdays. Come and watch.</p></li>
+    </ol>
+    <blockquote class="quote rv">
+      "I came for one Saturday class in March. I now own eleven bowls and have opinions about foot rings."
+      <footer>Meenal, Bani Park. Regular since her first class.</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap v-grid">
+    <div class="rv">
+      <p class="eyebrow">Find us</p>
+      <h2>Blue door, <em>second lane</em> on the left.</h2>
+      <address class="addr">Kiln Studio<br>14 Kumharon ki Gali, off Kishanpole Bazaar<br>Old City, Jaipur 302001</address>
+      <dl class="hours">
+        <div><dt>Wednesday to Friday</dt><dd>11 am to 7 pm, shop and studio</dd></div>
+        <div><dt>Saturday and Sunday</dt><dd>Classes at 10 am and 4 pm, shop all day</dd></div>
+        <div><dt>Monday and Tuesday</dt><dd>Closed. We are loading the kiln.</dd></div>
+      </dl>
+      <div class="way">
+        <div><b>5 min</b>walk from Chhoti Chaupar metro</div>
+        <div><b>10 min</b>auto from Jaipur Junction</div>
+        <div><b>35 min</b>cab from the airport</div>
+      </div>
+      <div class="cta" style="margin-top:0">
+        <a class="btn btn-gold" href="https://www.google.com/maps/search/?api=1&query=Kishanpole+Bazaar+Jaipur" target="_blank" rel="noopener">Open in Maps</a>
+        <a class="btn btn-line" href="tel:+911415550142">Call +91 141 555 0142</a>
+      </div>
+    </div>
+
+    <div class="map rv">
+      <svg viewBox="0 0 520 480" role="img" aria-label="Sketch map: Kiln sits in a lane west of Kishanpole Bazaar, between Ajmeri Gate and Chhoti Chaupar.">
+        <rect width="520" height="480" fill="#F3EADB"/>
+        <g fill="#EADDC8">
+          <rect x="40" y="40" width="150" height="80" rx="6"/><rect x="40" y="170" width="70" height="110" rx="6"/>
+          <rect x="130" y="170" width="140" height="48" rx="6"/><rect x="130" y="240" width="140" height="40" rx="6"/>
+          <rect x="40" y="310" width="230" height="90" rx="6"/><rect x="330" y="170" width="150" height="110" rx="6"/>
+          <rect x="330" y="310" width="150" height="90" rx="6"/><rect x="330" y="40" width="150" height="80" rx="6"/>
+          <rect x="210" y="40" width="60" height="80" rx="6"/>
+        </g>
+        <path d="M0 145H520" stroke="#E7B3A0" stroke-width="26"/>
+        <path d="M300 145V480" stroke="#E7B3A0" stroke-width="26"/>
+        <path d="M300 0V145" stroke="#E7B3A0" stroke-width="14" opacity=".6"/>
+        <path d="M120 229H300" stroke="#E7B3A0" stroke-width="9"/>
+        <path d="M0 440H520" stroke="#B4552D" stroke-width="5" stroke-dasharray="14 7"/>
+        <rect x="278" y="123" width="44" height="44" rx="4" fill="#F3EADB" stroke="#B4552D" stroke-width="2"/>
+        <path d="M286 456V430a14 14 0 0 1 28 0v26z" fill="#B4552D"/>
+        <text x="24" y="138">Chandpole Bazaar</text>
+        <text x="350" y="138">Tripolia Bazaar</text>
+        <text x="332" y="104">Chhoti Chaupar</text>
+        <text x="330" y="436">Ajmeri Gate</text>
+        <text transform="translate(304 380) rotate(-90)">Kishanpole Bazaar</text>
+        <path d="M300 440V229H172" fill="none" stroke="#1F3FA0" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+        <g class="pin">
+          <path d="M160 229c-18-22-28-36-28-50a28 28 0 0 1 56 0c0 14-10 28-28 50z" fill="#1F3FA0"/>
+          <circle cx="160" cy="179" r="11" fill="#E9A23B"/>
+        </g>
+        <text x="60" y="212" style="fill:#1F3FA0;font-size:13px">Kiln</text>
+      </svg>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <p>A two-room studio, one gas kiln and four people who like mud. Est. 2019, Jaipur.</p>
+      <ul>
+        <li><a href="mailto:hello@kilnjaipur.example">hello@kilnjaipur.example</a></li>
+        <li><a href="tel:+911415550142">+91 141 555 0142</a></li>
+        <li><a href="#classes">Book a class</a></li>
+      </ul>
+      <ul>
+        <li><a href="#shop">Tableware</a></li>
+        <li><a href="#process">How we make</a></li>
+        <li><a href="#visit">Hours and directions</a></li>
+      </ul>
+    </div>
+    <div class="foot-big" aria-hidden="true">Kiln</div>
+    <div class="foot-end"><span>Made by hand in Jaipur, Rajasthan.</span><span>Private groups and team days: write to us.</span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+document.documentElement.classList.add('js');
+const $=s=>document.querySelector(s), inr=n=>'₹'+n.toLocaleString('en-IN');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---------- the wheel ---------- */
+(()=>{
+  const svg=$('#wheel'),N=26,H=250,BY=388,CX=200,MIN=16,MAX=150;
+  const shape=t=>46+62*Math.exp(-((t-.38)**2)/.06)-8*t+14*Math.exp(-((t-1)**2)/.012);
+  let r=[],glaze='#C0673C',inner='#7A3A1C',dirty=true,down=false,wob=0;
+  const init=()=>{r=Array.from({length:N},(_,i)=>shape(i/(N-1)));dirty=true};
+  const y=i=>BY-(i/(N-1))*H;
+  const side=(pts)=>{let d='';for(let k=0;k<pts.length-1;k++){const a=pts[k],b=pts[k+1];d+=`Q${a[0].toFixed(1)} ${a[1].toFixed(1)} ${((a[0]+b[0])/2).toFixed(1)} ${((a[1]+b[1])/2).toFixed(1)}`}const l=pts[pts.length-1];return d+`L${l[0].toFixed(1)} ${l[1].toFixed(1)}`};
+  function draw(){
+    const L=[],R=[];
+    for(let i=N-1;i>=0;i--)L.push([CX-r[i],y(i)]);
+    for(let i=0;i<N;i++)R.push([CX+r[i],y(i)]);
+    const fr=r[0]*.14;
+    const d=`M${L[0][0].toFixed(1)} ${L[0][1]}`+side(L)+`A${r[0].toFixed(1)} ${fr.toFixed(1)} 0 0 0 ${R[0][0].toFixed(1)} ${BY}`+side(R)+'Z';
+    for(const id of['#pBody','#pSpk','#pShade'])$(id).setAttribute('d',d);
+    $('#pBody').setAttribute('fill',glaze);
+    const top=r[N-1],rim=$('#pRim');
+    rim.setAttribute('cx',CX);rim.setAttribute('cy',y(N-1));rim.setAttribute('rx',top);rim.setAttribute('ry',top*.14);
+    rim.setAttribute('fill',inner);rim.setAttribute('stroke',glaze);
+    const f=$('#pFoot');f.setAttribute('rx',r[0]+10);f.setAttribute('ry',r[0]*.14+5);f.setAttribute('cy',BY+3);
+    let g='';
+    for(let i=2;i<N-1;i+=3){const rr=r[i]-1;g+=`<path class="spin" style="animation-duration:${(.8+i*.03).toFixed(2)}s" d="M${(CX-rr).toFixed(1)} ${y(i).toFixed(1)}A${rr.toFixed(1)} ${(rr*.14).toFixed(1)} 0 0 0 ${(CX+rr).toFixed(1)} ${y(i).toFixed(1)}"/>`}
+    $('#pLines').innerHTML=g;
+  }
+  function pt(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+  function push(e){
+    const p=pt(e),idx=(BY-p.y)/H*(N-1);
+    if(idx<-3||idx>N+2)return;
+    const target=Math.max(MIN,Math.min(MAX,Math.abs(p.x-CX)));
+    for(let i=0;i<N;i++){const w=Math.exp(-((i-idx)**2)/9.5);r[i]+=(target-r[i])*w*.3;r[i]=Math.max(MIN,Math.min(MAX,r[i]))}
+    r[0]=Math.max(r[0],30);dirty=true;
+  }
+  svg.addEventListener('pointerdown',e=>{down=true;try{svg.setPointerCapture(e.pointerId)}catch(_){}push(e);document.querySelector('.hint').textContent='Nice. Keep going.'});
+  svg.addEventListener('pointermove',e=>{if(down)push(e)});
+  ['pointerup','pointercancel','pointerleave'].forEach(n=>svg.addEventListener(n,()=>down=false));
+  document.querySelectorAll('.glazes [data-g]').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.glazes [data-g]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    glaze=b.dataset.g;inner=b.dataset.i;dirty=true}));
+  $('#reset').addEventListener('click',()=>{init();document.querySelector('.hint').textContent='Drag the clay in or out.'});
+  init();
+  (function loop(){if(dirty){draw();dirty=false}requestAnimationFrame(loop)})();
+})();
+
+/* ---------- ticker ---------- */
+(()=>{
+  const items=['Wheel classes every Saturday and Sunday','Kiln opens Thursdays, come and watch','Stoneware fired to 1,220°C','Ships across India','Five minutes from Chhoti Chaupar metro','Chai is always on'];
+  const h=items.map(t=>`<span>${t}</span>`).join('');$('#tick').innerHTML=h+h;
+})();
+
+/* ---------- class booking ---------- */
+(()=>{
+  const PRICE=2800,days=[],now=new Date();let sel=null,ppl=1;
+  const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1);
+  while(days.length<6){if(d.getDay()===6||d.getDay()===0)days.push(new Date(d));d.setDate(d.getDate()+1)}
+  const fmt=(x,o)=>x.toLocaleDateString('en-IN',o);
+  const seats=(x,s)=>{const n=(x.getDate()*7+x.getMonth()*13+s*5)%7;return n};
+  const wrap=$('#days');
+  days.forEach((x,di)=>{
+    const row=document.createElement('div');row.className='day';
+    row.innerHTML=`<div class="d">${fmt(x,{weekday:'short'})}<b>${fmt(x,{day:'numeric',month:'short'})}</b></div>`;
+    [['10 am to 1 pm','Morning'],['4 pm to 7 pm','Evening']].forEach(([time,name],si)=>{
+      const left=seats(x,si),b=document.createElement('button');b.className='slot';b.setAttribute('aria-pressed','false');
+      b.innerHTML=`${time}<small>${left===0?'Full':left<=2?`<span class="low">${left} seat${left>1?'s':''} left</span>`:left+' seats left'}</small>`;
+      if(!left)b.disabled=true;
+      b.addEventListener('click',()=>{
+        wrap.querySelectorAll('.slot').forEach(s=>s.setAttribute('aria-pressed','false'));
+        b.setAttribute('aria-pressed','true');
+        sel={date:x,time,left};ppl=Math.min(ppl,left);upd()});
+      row.appendChild(b)});
+    wrap.appendChild(row)});
+  const first=days[0],diff=Math.round((first-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
+  $('#nextDay').textContent=diff===1?'Tomorrow':'This '+fmt(first,{weekday:'long'});
+  function upd(){
+    const max=sel?sel.left:6;
+    $('#ppl').textContent=ppl+(ppl>1?' people':' person');
+    $('#total').textContent=inr(ppl*PRICE);
+    $('#minus').disabled=ppl<=1;$('#plus').disabled=ppl>=max;
+    const a=$('#hold');
+    if(sel){
+      const when=fmt(sel.date,{weekday:'long',day:'numeric',month:'long'})+', '+sel.time;
+      a.textContent='Hold '+ppl+(ppl>1?' seats':' seat')+' for '+fmt(sel.date,{weekday:'short',day:'numeric',month:'short'});
+      a.setAttribute('aria-disabled','false');
+      a.href='mailto:hello@kilnjaipur.example?subject='+encodeURIComponent('Wheel class: '+when)+'&body='+encodeURIComponent(`Hello Kiln,\n\nPlease hold ${ppl} ${ppl>1?'seats':'seat'} for the wheel class on ${when}.\nTotal: ${inr(ppl*PRICE)}, to be paid at the studio.\n\nName:\nPhone:\n`);
+    }
+  }
+  $('#minus').addEventListener('click',()=>{ppl=Math.max(1,ppl-1);upd()});
+  $('#plus').addEventListener('click',()=>{ppl=Math.min(sel?sel.left:6,ppl+1);upd()});
+  upd();
+})();
+
+/* ---------- shop ---------- */
+(()=>{
+  const spk=d=>`<path d="${d}" fill="url(#sp)"/>`;
+  const sh=(cx,cy,rx)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="7" fill="#2A1B14" opacity=".16"/>`;
+  const P=[
+   {n:'Thali dinner plate',d:'27 cm, with a low wall that keeps the dal where you put it.',p:1450,bg:'#E7B3A0',
+    s:c=>`${sh(104,146,66)}<circle cx="100" cy="80" r="64" fill="${c}"/><circle cx="100" cy="80" r="64" fill="url(#sp)"/><circle cx="100" cy="80" r="50" fill="none" stroke="#000" stroke-opacity=".14" stroke-width="2"/><circle cx="100" cy="80" r="47" fill="#fff" opacity=".1"/><path d="M58 50a52 52 0 0 1 40-22" stroke="#fff" stroke-opacity=".5" stroke-width="3" fill="none" stroke-linecap="round"/>`,c:'#1F3FA0'},
+   {n:'Deep pasta bowl',d:'Wide and shallow. Also the best khichdi bowl we know of.',p:1250,bg:'#D8E2D2',
+    s:c=>{const b='M38 62Q100 52 162 62Q154 128 100 128Q46 128 38 62Z';return `${sh(100,132,54)}<path d="${b}" fill="${c}"/>${spk(b)}<path d="${b}" fill="url(#round)"/><ellipse cx="100" cy="62" rx="62" ry="11" fill="#D9CDB6" stroke="${c}" stroke-width="4"/><path d="M70 124h60" stroke="#B4552D" stroke-width="5" stroke-linecap="round"/>`},c:'#F0E6D4'},
+   {n:'Chai cups, set of two',d:'No handle, 120 ml, sized for cutting chai and second helpings.',p:900,bg:'#F0D9A8',
+    s:c=>{const a='M44 70h52l-8 56q-18 5-36 0z',b='M108 58h52l-8 68q-18 5-36 0z';return `${sh(72,130,30)}${sh(134,130,30)}<path d="${a}" fill="${c}"/>${spk(a)}<path d="${a}" fill="url(#round)"/><ellipse cx="70" cy="70" rx="26" ry="5.5" fill="#6B2E14" stroke="${c}" stroke-width="3"/><path d="${b}" fill="#1F3FA0"/>${spk(b)}<path d="${b}" fill="url(#round)"/><ellipse cx="134" cy="58" rx="26" ry="5.5" fill="#12255F" stroke="#1F3FA0" stroke-width="3"/>`},c:'#B4552D'},
+   {n:'Morning mug',d:'350 ml with a thumb rest. Raw clay foot, glazed where it matters.',p:850,bg:'#D5DCF0',
+    s:c=>{const b='M58 44h80l-5 80q-35 8-70 0z';return `${sh(100,130,44)}<path d="M136 62q34-2 30 26q-4 22-34 22" fill="none" stroke="${c}" stroke-width="10" stroke-linecap="round"/><path d="${b}" fill="${c}"/>${spk(b)}<path d="M61.500 100h73l-1.500 24q-35 8-70 0z" fill="#B4552D"/><path d="${b}" fill="url(#round)"/><ellipse cx="98" cy="44" rx="40" ry="7" fill="#7A6A52" stroke="${c}" stroke-width="3.500"/>`},c:'#F0E6D4'},
+   {n:'Water pitcher',d:'1.2 litres. Pours without dribbling, which took us a year to get right.',p:2400,bg:'#EADDC8',
+    s:c=>{const b='M76 30h46q4 22 22 44q14 28-8 54q-36 8-72 0q-24-26-8-54q16-22 20-44z';return `${sh(100,134,48)}<path d="M132 52q40 4 30 40q-6 18-24 22" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round"/><path d="M78 30l-16-6l10 22z" fill="${c}"/><path d="${b}" fill="${c}"/>${spk(b)}<path d="${b}" fill="url(#round)"/><ellipse cx="99" cy="30" rx="23" ry="4.500" fill="#14306F" stroke="${c}" stroke-width="3"/>`},c:'#1F3FA0'},
+   {n:'Long serving platter',d:'38 cm oval for kebabs, mango in season, or the whole cake.',p:3200,bg:'#C9D8CC',
+    s:c=>`${sh(104,128,78)}<ellipse cx="100" cy="80" rx="82" ry="44" fill="${c}"/><ellipse cx="100" cy="80" rx="82" ry="44" fill="url(#sp)"/><ellipse cx="100" cy="80" rx="68" ry="33" fill="none" stroke="#000" stroke-opacity=".14" stroke-width="2"/><ellipse cx="100" cy="80" rx="82" ry="44" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"/><path d="M40 58q24-20 56-22" stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none" stroke-linecap="round"/>`,c:'#E9A23B'}
+  ];
+  let count=0,sum=0,tt;
+  const grid=$('#grid');
+  P.forEach(p=>{
+    const el=document.createElement('article');el.className='card rv';
+    el.innerHTML=`<div class="pic" style="background:${p.bg}"><svg viewBox="0 0 200 160" aria-hidden="true">${p.s(p.c)}</svg></div><h3>${p.n}</h3><p>${p.d}</p><div class="row"><span class="price">${inr(p.p)}</span><button class="add" aria-label="Add ${p.n} to basket">Add to basket</button></div>`;
+    el.querySelector('.add').addEventListener('click',()=>{
+      count++;sum+=p.p;const b=$('#basket');b.textContent=`Basket ${count} · ${inr(sum)}`;b.classList.add('has');
+      const t=$('#toast');t.textContent=p.n+' added. '+(sum>=4000?'Shipping is on us.':inr(4000-sum)+' more for free shipping.');
+      t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)});
+    grid.appendChild(el)});
+})();
+
+/* ---------- reveal ---------- */
+(()=>{
+  const els=document.querySelectorAll('.rv');
+  if(reduce||!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+  els.forEach((e,i)=>{e.style.transitionDelay=(i%4)*70+'ms';io.observe(e)});
+})();
+</script>
+</body>
+</html>

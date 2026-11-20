@@ -18,6 +18,8 @@ returns JSON: composited contrast with alpha and ancestor opacity, touch targets
 account for pseudo-element hit areas, overflow, dead links, unreachable scroll regions,
 focusables inside hidden containers, browser surfaces, and script-gated content.
 
+To run the browser half, paste what `--emit-browser` prints into the page's devtools console, or pass it to your browser tool's evaluate call (Playwright: `await page.evaluate(probe)`), about two seconds after load. It returns a list of findings. A purely decorative layer held at `opacity: 0` should carry `aria-hidden="true"` so the probe does not read it as hidden content.
+
 Exit 0 is clean, exit 2 means findings. A line that quotes a banned pattern as evidence
 rather than committing it can carry `rav-verify-ignore`.
 

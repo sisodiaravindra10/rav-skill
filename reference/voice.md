@@ -15,11 +15,11 @@ rav owns how copy sits on the page and whether it sounds like a person. It does 
 | Interface text: labels, errors, empty states, confirmations | `design:ux-copy` |
 | Ad headlines and variations | `ad-creative` |
 | An existing draft that reads as machine-written, or a final sweep on long copy | `humanizer` |
-| Anything in the ZopDev voice | the owning zopdev skill, with `zopdev-brand` for the banned words |
+| Anything in a company's brand voice | that company's brand skill or voice file, if there is one |
 
 Whatever those produce still passes through this file before it ships. They optimise for persuasion; this is the filter for sounding written.
 
-`humanizer` goes deeper than this file on the sentence level: 26 patterns with before and after examples, ranked by how strong a tell each is, and a check that no fact was lost in the rewrite. Use it for rewriting. This file stays the page-level filter and carries his own rules, which win where the two differ: humanizer tolerates the occasional dash, he does not, and its own text uses the section-sign glyph for cross-references, which never carries into output.
+`humanizer` goes deeper than this file on the sentence level: 26 patterns with before and after examples, ranked by how strong a tell each is, and a check that no fact was lost in the rewrite. Use it for rewriting. This file stays the page-level filter, and the profile's voice rules win where the two differ.
 
 ## The patterns
 
@@ -57,20 +57,20 @@ Each one names the shape, shows it, and gives the fix.
 
 **16. Self-description.** "A clean, modern platform." "A beautifully designed experience." The page describing its own qualities. Show the thing.
 
-**17. Punctuation tells.** Em dashes, the section-sign glyph, a colon in every headline, title case on every heading, emoji as bullets, an ellipsis for mood, exclamation marks. See SKILL.md for the first two.
+**17. Punctuation tells.** Em dashes, a colon in every headline, title case on every heading, emoji as bullets, an ellipsis for mood, exclamation marks. See SKILL.md for the first two.
 
 **18. Feature as benefit as feature.** "Smart categorisation that works intelligently." The sentence loops. Name the mechanism once: "It reads the SMS and picks the category."
 
 ## How to write a line instead
 
-- **Subject, verb, object, and the object is concrete.** "Khata reads your bank SMS and writes the entry." A reader could check it.
+- **Subject, verb, object, and the object is concrete.** "It reads the bank alert and writes the ledger entry." A reader could check it.
 - **Lead with what the reader gets or does,** not with what the company believes.
 - **One idea per sentence.** If it needs "and" twice, it is two sentences.
 - **Use the reader's own nouns.** Invoice, TDS, UPI, standup, deploy. The category's real words beat any invented ones.
-- **A headline is a claim someone could disagree with.** "Your books keep themselves" can be argued with. "Bookkeeping, reimagined" cannot, which is why it says nothing.
+- **A headline is a claim someone could disagree with.** "Groomed at your door in forty minutes" can be argued with. "Grooming, reimagined" cannot, which is why it says nothing.
 - **Numbers carry their unit and their source.** "10% TDS on a professional fee", not "smart tax handling".
 - **Shorter is not the goal. Truer is.** A long sentence full of facts beats a short one full of air.
-- **British or Indian English for his own work,** consistently. Do not mix "colour" and "color" on one page.
+- **One spelling convention per page,** the one the profile or the audience calls for. Do not mix "colour" and "color".
 
 ## The pass, in order
 
@@ -81,7 +81,7 @@ Run it on every visible string: headlines, subheads, buttons, labels, captions, 
 3. **Pattern scan.** Walk the eighteen patterns above. `scripts/verify.mjs --source` flags the mechanical ones as `slop-phrase`.
 4. **Read aloud.** Would a person say this sentence to another person across a table? If they would be embarrassed, rewrite it.
 5. **Check every claim.** Each number, name and quote traces to something real, or is labelled sample, or goes.
-6. **Banned characters.** Grep for the em dash and the section-sign glyph across every surface that ships.
+6. **Banned characters.** Grep for the em dash, and anything the profile bans, across every surface that ships.
 
 ## What this file does not license
 

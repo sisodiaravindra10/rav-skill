@@ -1,8 +1,6 @@
 # How Ravindra works
 
-His own process and judgment, taken from an interview on 19 Nov 2026. Load this at the start of any build, generate or redesign, right after intake, and in critique mode when deciding what matters most.
-
-Everything else in this skill is a rule he accepted or corrected, much of it inherited from other people's skills. This file is the part that is his. Where it and a borrowed rule disagree, this file wins.
+An example profile: the real process of the designer who made this skill, from an interview on 19 Nov 2026. It shows what `profile/process.md` looks like when it is done. In his own install this file sits in `profile/` and outranks every rule in the core. In yours it is only an example: do not apply it to your work, run `/rav setup` and get your own.
 
 Lines in quotation marks are his words. Lines marked *(reading)* are an interpretation that he has not confirmed; treat them as a good guess and drop them if he says otherwise.
 

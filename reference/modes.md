@@ -14,7 +14,7 @@ RAV_PREFLIGHT block
 
 Intent: <one line: "Building <thing> for <where>, <one key choice>.">
 
-<code, real and working, no TODOs>
+<code, real and working, no TODOs beyond labelled image slots>
 
 Where the skill fired:
 - <3 to 6 bullets, each pointing at a rule in this skill>
@@ -26,12 +26,12 @@ Where the skill fired:
 1. **Classify the work.** New surface or replacement world, whole surface inside an established world, or a local addition. Only the first runs [world.md](world.md). A local addition inherits its surface and changes nothing else.
 2. **Pick the foundation honestly.** One design system per project, from the map in world.md. Verify every dependency exists in `package.json` before importing, and print the install command when it does not. Never reinvent CSS for something with an official package.
 3. **Scaffold the world.** Pick type from [fonts.md](fonts.md). Color strategy and palette, type roles, spacing scale, radius system, all locked before any component. Theme lock, color lock, shape lock stated once and obeyed everywhere.
-4. **Compose.** State the idea in one sentence before any markup; if it reads as a description rather than an idea, stop and find one. Then the hero archetype. Build the hero to a finished state and show it before composing anything below it ([process.md](process.md)); then the section families. Count the layout families as you go: eight sections need at least four. Bento cells equal content items exactly.
+4. **Compose.** State the idea in one sentence before any markup; if it reads as a description rather than an idea, stop and find one. Then the hero archetype. Build the hero to a finished state and show it before composing anything below it (The profile comes first, SKILL.md); then the section families. Count the layout families as you go: eight sections need at least four. Bento cells equal content items exactly.
 5. **Source the visuals** in the priority order from SKILL.md's Imagery section. Generate before hand-rolling. Never a div-based fake screenshot. Product UI is a capture of the running app or the real component, shown large.
 6. **Choreograph.** Load [micro.md](micro.md) for the control-scale floor. Decide with `animate` (or `animate-expo`, or `apple-design` for anything gestural or physical), then build with the relevant GSAP skill. One authored moment, custom easing, staggered entry where the content is genuinely a list, reduced-motion path. If `register=brand|kinetic` and the brief invokes a physical thing, run the Cinematic hero protocol.
 7. **Load [craft-floor.md](craft-floor.md)** immediately before writing the UI and build against it silently.
 8. **Write the copy with [voice.md](voice.md) open,** then run its pass on every string.
-9. **Ship real working code.** No placeholder copy, no `TODO`, no half-finished sections, no fabricated metrics.
+9. **Ship real working code.** No placeholder copy, no `TODO` beyond a labelled image slot, no half-finished sections, no fabricated metrics.
 10. **Verify in bounded passes.** Build fully, inspect once batched (desktop and mobile, both themes, real content, the states that exist), fix everything that round showed in one batch, confirm with at most one more round, stop.
 11. **Run [tells.md](tells.md)** as the final filter, then the SKILL.md pre-output checklist.
 

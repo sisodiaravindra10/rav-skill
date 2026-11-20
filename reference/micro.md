@@ -2,7 +2,7 @@
 
 The small motion on the things people touch: presses, hovers, popovers, tooltips, toggles, toasts, tabs. Load this in build mode before writing any interactive component, in the `animate`, `delight` and `polish` moves, and in critique mode when a page looks right and feels dead.
 
-These rules are distilled from Emil Kowalski's `emil-design-eng` skill and rewritten as rav defaults, so the floor applies on every build without a second skill load. For anything beyond the floor (a new animation from scratch, a gesture, a sequence) load the skill named at the end of each section. He decides; this file is the part that is always on.
+These rules are distilled from Emil Kowalski's `emil-design-eng` skill and rewritten as rav defaults, so the floor applies on every build without a second skill load. For anything beyond the floor (a new animation from scratch, a gesture, a sequence) load the skill named at the end of each section. Emil decides; this file is the part that is always on.
 
 SKILL.md sets the taste for motion at page scale. This file works at the scale of one control. No single item here gets noticed; together they are why an interface feels built by a person.
 

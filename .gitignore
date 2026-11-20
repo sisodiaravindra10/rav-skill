@@ -1,0 +1,4 @@
+profile/*
+!profile/README.md
+.DS_Store
+evals/results/

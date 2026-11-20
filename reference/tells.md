@@ -80,7 +80,7 @@ Override only when the brief names those colors, or the identity is genuinely vi
 - Two CTAs with the same intent on one page.
 - Cute AI copy generally: forced metaphors, passive-aggressive humility, mock-poetic micro-meta. Boring and functional beats cute and wrong.
 - A quote or testimonial whose source nobody opened, and any line attributed to a publication rather than a named person. Trace it or cut it.
-- The section-sign glyph (U+00A7) anywhere. Write "section 4".
+- Any character or word the profile bans.
 
 ## Layout tells
 

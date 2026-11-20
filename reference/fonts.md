@@ -11,7 +11,7 @@ Every family below was confirmed to resolve on the Google Fonts API on 19 Nov 20
 1. **Start from the register and the subject, not from this list.** The face is an object from the subject's world. Decide what it should feel like first, then find it here.
 2. **Pick the display face first.** It carries the idea. Body and mono follow from it.
 3. **Three roles at most:** display, body, mono. Two is often enough.
-4. **Do not repeat yourself.** If the last build used Space Grotesk plus Inter, this one does not, unless it is a new personal surface on his DNA defaults. Rotating is the whole point of a wider roster.
+4. **Do not repeat yourself.** If the last build used Space Grotesk plus Inter, this one does not, unless the profile pins that pairing for the user's own surfaces. Rotating is the whole point of a wider roster.
 5. **Variable axes are a design tool.** Width and optical size do more than a second family would. Archivo at `wdth 125 wght 800` and Archivo at `wdth 62 wght 600` read as two faces from one file.
 
 ## Display, by character
@@ -80,7 +80,7 @@ Each is display, body, mono. They are starting points, not presets.
 | Indian consumer brand | Rozha One or Baloo 2 / Mukta / none |
 | Heritage, place | Cormorant Garamond / Hanken Grotesk / none, with Tiro Devanagari Hindi for script |
 | Calm product chrome | Inter or Geist alone, plus its mono |
-| His DNA default (new personal surface only) | Space Grotesk / Inter / JetBrains Mono |
+| The user's own default | whatever `profile/dna.md` pins, on their own surfaces only |
 
 ## Loading it properly
 
@@ -101,5 +101,5 @@ Each is display, body, mono. They are starting points, not presets.
 
 - The 2-line rule, the display cap and the tracking floor in SKILL.md apply to every face here.
 - Inter, Roboto, Open Sans and system-ui stay body faces, never the display face.
-- His own picks (Space Grotesk, Instrument Serif, Newsreader) stay recommended. This file widens the roster; it does not demote them.
+- Well-loved faces (Space Grotesk, Instrument Serif, Newsreader) stay recommended. This file widens the roster; it does not demote them. A face the profile pins always wins.
 - A brief that pins a face wins. If the pinned face cannot be loaded, say so in the preflight and name the stand-in.

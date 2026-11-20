@@ -24,8 +24,8 @@ const RULES = [
     why: "Zero em dashes and zero en-dash separators anywhere visible. Rewrite the join as a comma, colon or full stop.",
     test: (l) => /[—]|\s[–]\s/.test(l) },
 
-  { id: "section-sign", severity: "error",
-    why: "The section-sign glyph is banned everywhere in his work. Write the word section, or let the number stand alone.",
+  { id: "section-sign", severity: "warning",
+    why: "The section-sign glyph reads as legalese in an interface. Write the word section, or let the number stand alone.",
     test: (l) => /\u00A7|&sect;|&#167;|&#xA7;/i.test(l) },
 
   { id: "h-screen", severity: "error",

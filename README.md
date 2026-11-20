@@ -152,7 +152,7 @@ If you run your own comparison, open an issue with the result either way.
 
 <img src="assets/mascot/raven-tile.svg" alt="The rav mascot: a pixel raven on an orange square." width="96" align="left">
 
-"rav" is one letter short of raven, a bird that collects things and remembers faces. That seemed right for a skill whose job is to remember how you work. The sprites are in [`assets/mascot`](assets/mascot), drawn on a 16 by 16 grid.
+"rav" is two names at once. It is short for Ravindra, who made it, and one letter short of raven, a bird that collects things and remembers faces. That seemed right for a skill whose job is to remember how you work. The sprites are in [`assets/mascot`](assets/mascot), drawn on a 16 by 16 grid.
 
 <br clear="left">
 
